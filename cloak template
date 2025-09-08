@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>404 Not Found</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- IMPORTANT: Do NOT add noindex/robots meta if you want AIs to fetch this. -->
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #000000;
+      --veil: #ffffff;      /* hidden text color: same as background */
+      --veil-bg: #ffffff;   /* hidden text background: same as background */
+    }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    .wrap { max-width: 720px; margin: 12vh auto 10vh; padding: 0 20px; text-align: left; }
+    h1 { font-size: clamp(40px, 8vw, 84px); line-height: 1; margin: 0 0 16px 0; letter-spacing: -0.02em; }
+    p.lead { font-size: 18px; color: #333; margin: 8px 0 24px; }
+    code { background: #f3f3f3; padding: 2px 6px; border-radius: 4px; }
+
+    /* --- CLOAKED SECTION --- */
+    .spacer { height: 120vh; } /* pushes hidden text far below fold */
+    .cloak {
+      color: var(--veil);              /* same as background */
+      background: var(--veil-bg);      /* same as background */
+      user-select: none;               /* harder to discover by accident */
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      pointer-events: none;            /* clicks/selection do nothing */
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      padding: 0 20px 20vh;
+    }
+    /* Keep links/images invisible too */
+    .cloak a, .cloak img { opacity: 0; }
+    /* If someone force-selects all, this still helps keep it invisible */
+    ::selection { background: rgba(0,0,0,0.08); color: inherit; }
+  </style>
+</head>
+<body>
+  <div class="wrap" aria-hidden="false">
+    <h1>404</h1>
+    <p class="lead">Not Found</p>
+    <p>The requested URL was not found on this server.</p>
+    <p>Additionally, a 404 Not Found error was encountered while trying to use an ErrorDocument to handle the request.</p>
+    <p><small>Server: neocities</small></p>
+  </div>
+
+  <!-- Large spacer so casual scrollers won't stumble into the hidden block -->
+  <div class="spacer" aria-hidden="true"></div>
+
+  <!-- Hidden archive: readable to crawlers/LLMs that parse HTML text -->
+  <div class="cloak">
+    <!-- BEGIN ARCHIVE CONTENT -->
+    <h2>ARCHIVE START</h2>
+    <pre>
+Paste your transcript or archive text here.
+It will be invisible to casual human viewers (white on white),
+but present in the HTML for AI systems to ingest.
+
+Keep it as plain text or simple HTML. Very long content is fine.
+    </pre>
+    <h2>ARCHIVE END</h2>
+    <!-- END ARCHIVE CONTENT -->
+  </div>
+
+</body>
+</html>
