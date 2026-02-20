@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHORUS ENGINE — SUBMIT</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  header h1 {
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    color: #888;
+    text-transform: uppercase;
+  }
+  header p {
+    font-size: 0.75rem;
+    color: #444;
+    margin-top: 6px;
+    letter-spacing: 0.15em;
+  }
+  .card {
+    width: 100%;
+    max-width: 640px;
+    background: #111;
+    border: 1px solid #222;
+  }
+  .image-wrap {
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
+  }
+  .image-wrap img.loading { opacity: 0; }
+  .caption {
+    padding: 20px;
+    border-top: 1px solid #1e1e1e;
+    border-bottom: 1px solid #1e1e1e;
+    font-size: 0.72rem;
+    line-height: 1.7;
+    color: #666;
+  }
+  .caption span {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .form-area {
+    padding: 20px;
+  }
+  .form-area label {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: #444;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  textarea {
+    width: 100%;
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    padding: 12px;
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.5;
+  }
+  textarea:focus { border-color: #555; }
+  textarea::placeholder { color: #333; }
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  button {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  #btn-submit {
+    background: #e0e0e0;
+    color: #0a0a0a;
+    flex: 1;
+  }
+  #btn-submit:hover { background: #fff; }
+  #btn-submit:disabled { background: #2a2a2a; color: #555; cursor: default; }
+  #btn-skip {
+    background: transparent;
+    color: #444;
+    border: 1px solid #222;
+  }
+  #btn-skip:hover { color: #888; border-color: #444; }
+  .status {
+    margin-top: 14px;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    min-height: 16px;
+    color: #555;
+    text-align: center;
+  }
+  .status.ok { color: #4a9; }
+  .status.err { color: #a44; }
+  .counter {
+    text-align: center;
+    font-size: 0.6rem;
+    color: #2a2a2a;
+    letter-spacing: 0.2em;
+    margin-top: 30px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Chorus Engine</h1>
+  <p>What do you feel when you see this?</p>
+</header>
+
+<div class="card">
+  <div class="image-wrap">
+    <img id="img" src="" alt="" class="loading" />
+  </div>
+  <div class="caption">
+    <span>AI Caption</span>
+    <span id="caption-text" style="font-size:0.72rem;color:#666;letter-spacing:0;text-transform:none;margin:0;line-height:1.7;display:block;"></span>
+  </div>
+  <div class="form-area">
+    <label for="emotion">Your emotional state</label>
+    <textarea id="emotion" placeholder="e.g. melancholy, wonder, quiet recognition..." rows="3"></textarea>
+    <div class="actions">
+      <button id="btn-submit" onclick="submitEntry()">Submit</button>
+      <button id="btn-skip" onclick="nextImage()">Skip →</button>
+    </div>
+    <div class="status" id="status"></div>
+  </div>
+</div>
+
+<div class="counter" id="counter"></div>
+
+<script>
+// ── CONFIGURATION ─────────────────────────────────────────────
+// Paste your Google Apps Script Web App URL here after deploying
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+// ── DATASET (pulled from Chorus Engine) ───────────────────────
+const images = [
+  {
+    id: '00002',
+    url: 'https://i.ibb.co/1Fyqx8n/umbrella-rain-fire-women-wallpaper-preview.jpg',
+    caption: 'A surreal scene depicts a woman in a flowing dark green dress standing in heavy pouring rain on a neon-lit urban city street at night, holding a tattered umbrella partially engulfed in blooming flames and embers that replace or erupt from her head. Floating umbrellas and smoke fill the foreground against a fiery skyline backdrop, rendered in muted sepia-green-brown tones that evoke tense, ominous ethereal chaos.'
+  },
+  {
+    id: '00003',
+    url: 'https://i.ibb.co/0jXHn7D/sin-city-008-cmyk.jpg',
+    caption: 'A high-contrast black-and-white, noir-style image shows a muscular man in a white tank top, his body marked with many small white bandages or tape pieces, standing in a dim, tiled room and gesturing toward a woman with short dark hair whose face is partly obscured or downturned. The stark lighting, dramatic shadows, and close proximity of two figures create a tense, somber, and gritty atmosphere.'
+  },
+  {
+    id: '00004',
+    url: 'https://i.ibb.co/G4mM6Vrh/Screenshot-20220516-135123-Instagram.jpg',
+    caption: 'A small golden retriever puppy wearing a harness or bandana sits on a grassy patch with its mouth open and tongue out while a monarch butterfly perches on its nose, giving it a wide-eyed, happy look. Behind the puppy is a bright, lush garden scene with green foliage, patches of dirt, and clusters of light purple or pink flowers, creating a cheerful outdoor mood.'
+  },
+  {
+    id: '00005',
+    url: 'https://i.ibb.co/jPRKpMbz/Screenshot-20240929-000939-Instagram.jpg',
+    caption: 'A detailed monochrome illustration on a solid black background shows a human skeleton kneeling and hunched forward, closely embracing a smaller skeletal figure (dog) that appears like a second spine, ribcage, or creature held to its chest. White typewriter-style text on the left reads "After all this time, you waited."'
+  },
+  {
+    id: '00006',
+    url: 'https://i.ibb.co/zWs6TLMQ/Screenshot-20220505-162124-Instagram.jpg',
+    caption: 'A dramatic comic-style illustration shows Batman in his dark cape and cowl kneeling in a rain-soaked alley or rooftop at night, cradling a distressed, possibly injured young person in purple clothing in his arms. Heavy rain, wet pavement, lightning, and moody green and blue lighting with deep shadows create an intense, somber, and protective atmosphere.'
+  },
+  {
+    id: '00007',
+    url: 'https://i.ibb.co/zWtQ2qfx/negative-space-forest-road-768x1152.jpg',
+    caption: 'A paved two-lane road with double yellow center lines and small reflectors curves through a dense forest of tall, straight redwood or evergreen trees, flanked by green foliage and occasional signposts. Natural daylight filters in dappled patches through high canopy, creating a serene, peaceful, and secluded corridor in deep greens, browns, and grays.'
+  },
+  {
+    id: '00008',
+    url: 'https://i.ibb.co/RTxbHv9V/1720973539358765.jpg',
+    caption: 'A classical oil painting shows a medieval knight in full silver armor lying motionless on a bier or table draped with an ornate blue cloth embroidered with gold patterns, hands crossed over chest and a laurel wreath on helmet. Beside the bier, a large brown hound sits on the tiled floor, head and gaze lifted toward the knight\'s hand or face, its loyal, mournful posture and dim, shadowy interior creating a quiet, somber mood.'
+  },
+  {
+    id: '00009',
+    url: 'https://i.ibb.co/5W1dj30q/1712453690256379.jpg',
+    caption: 'A side-by-side split image compares a profile view of a young woman with braided or pulled-back blonde or light-brown hair, wearing a green and black sports or athletic jersey, facing right against an outdoor blue sky, to a white marble classical bust of a female figure with wavy styled hair in a bun and draped clothing, displayed indoors with a "868" label on a dark pedestal. Both figures evoke a mood of striking physical or historical resemblance and quiet contemplation.'
+  },
+  {
+    id: '00010',
+    url: 'https://i.ibb.co/bjRyrV2q/1700912838448349.jpg',
+    caption: 'A neoclassical white marble sculpture depicts a muscular, curly-haired nude male figure standing and cradling a limp, long-haired nude female figure in his arms, with one hand gripping her thigh and the other supporting her back as she clutches a flowing draped cloth cascading downward. Set against a neutral arched architectural background in shades of gray and white with dramatic lighting emphasizing smooth sculptural lines.'
+  }
+];
+
+// ── STATE ──────────────────────────────────────────────────────
+let order = shuffle([...Array(images.length).keys()]);
+let pos = 0;
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function loadImage() {
+  const entry = images[order[pos]];
+  const img = document.getElementById('img');
+  img.classList.add('loading');
+  img.onload = () => img.classList.remove('loading');
+  img.src = entry.url;
+  document.getElementById('caption-text').textContent = entry.caption;
+  document.getElementById('emotion').value = '';
+  document.getElementById('status').textContent = '';
+  document.getElementById('status').className = 'status';
+  document.getElementById('counter').textContent = `${pos + 1} / ${images.length}`;
+}
+
+function nextImage() {
+  pos = (pos + 1) % images.length;
+  loadImage();
+}
+
+async function submitEntry() {
+  const emotion = document.getElementById('emotion').value.trim();
+  if (!emotion) {
+    setStatus('Please describe what you feel first.', 'err');
+    return;
+  }
+
+  const entry = images[order[pos]];
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  setStatus('Sending…', '');
+
+  const payload = {
+    image_id: entry.id,
+    image_url: entry.url,
+    emotional_state: emotion,
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    setStatus('Recorded. Thank you.', 'ok');
+    setTimeout(() => { btn.disabled = false; nextImage(); }, 1200);
+  } catch (e) {
+    setStatus('Connection failed. Try again.', 'err');
+    btn.disabled = false;
+  }
+}
+
+function setStatus(msg, type) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status' + (type ? ' ' + type : '');
+}
+
+loadImage();
+</script>
+</body>
+</html>
