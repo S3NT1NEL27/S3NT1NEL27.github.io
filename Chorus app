@@ -175,7 +175,7 @@
 <script>
 // ── CONFIGURATION ─────────────────────────────────────────────
 // Paste your Google Apps Script Web App URL here after deploying
-const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAt8uWIJGu8mB88nfGksELwciUpR2G7k8lY_6qqJMutkFA0CKdSnkHcZTZv5nliC2X/exec';
 
 // ── DATASET (pulled from Chorus Engine) ───────────────────────
 const images = [
