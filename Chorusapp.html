@@ -52,22 +52,7 @@
     transition: opacity 0.4s ease;
   }
   .image-wrap img.loading { opacity: 0; }
-  .caption {
-    padding: 20px;
-    border-top: 1px solid #1e1e1e;
-    border-bottom: 1px solid #1e1e1e;
-    font-size: 0.72rem;
-    line-height: 1.7;
-    color: #666;
-  }
-  .caption span {
-    display: block;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: #333;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
+
   .form-area {
     padding: 20px;
   }
@@ -153,10 +138,7 @@
   <div class="image-wrap">
     <img id="img" src="" alt="" class="loading" />
   </div>
-  <div class="caption">
-    <span>AI Caption</span>
-    <span id="caption-text" style="font-size:0.72rem;color:#666;letter-spacing:0;text-transform:none;margin:0;line-height:1.7;display:block;"></span>
-  </div>
+
   <div class="form-area">
     <label for="emotion">Your emotional state</label>
     <textarea id="emotion" placeholder="e.g. melancholy, wonder, quiet recognition..." rows="3"></textarea>
