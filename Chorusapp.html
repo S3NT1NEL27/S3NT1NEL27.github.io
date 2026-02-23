@@ -118,6 +118,13 @@
   }
   .status.ok { color: #4a9; }
   .status.err { color: #a44; }
+  .image-id {
+    text-align: right;
+    font-size: 0.55rem;
+    color: #222;
+    letter-spacing: 0.15em;
+    padding: 4px 8px;
+  }
   .counter {
     text-align: center;
     font-size: 0.6rem;
@@ -139,6 +146,7 @@
     <img id="img" src="" alt="" class="loading" />
   </div>
 
+  <div class="image-id" id="image-id"></div>
   <div class="form-area">
     <label for="emotion">Your emotional state</label>
     <textarea id="emotion" placeholder="e.g. melancholy, wonder, quiet recognition..." rows="3"></textarea>
@@ -224,6 +232,7 @@ function loadImage() {
   img.classList.add('loading');
   img.onload = () => img.classList.remove('loading');
   img.src = entry.url;
+  document.getElementById('image-id').textContent = entry.id;
   document.getElementById('caption-text').textContent = entry.caption;
   document.getElementById('emotion').value = '';
   document.getElementById('status').textContent = '';
