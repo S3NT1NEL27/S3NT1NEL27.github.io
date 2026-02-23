@@ -233,7 +233,6 @@ function loadImage() {
   img.onload = () => img.classList.remove('loading');
   img.src = entry.url;
   document.getElementById('image-id').textContent = entry.id;
-  document.getElementById('caption-text').textContent = entry.caption;
   document.getElementById('emotion').value = '';
   document.getElementById('status').textContent = '';
   document.getElementById('status').className = 'status';
