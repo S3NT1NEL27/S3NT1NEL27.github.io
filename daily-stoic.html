@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Stoic</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Icon components (inline SVG, replacing lucide-react)
+    const RefreshCw = ({ size = 24 }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+        <path d="M21 3v5h-5"/>
+        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+        <path d="M8 16H3v5"/>
+      </svg>
+    );
+
+    const X = ({ size = 24 }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 6 6 18"/>
+        <path d="m6 6 12 12"/>
+      </svg>
+    );
+
+    const MessageSquare = ({ size = 24, className = '' }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    );
+
+    const Send = ({ size = 24 }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m22 2-7 20-4-9-9-4Z"/>
+        <path d="M22 2 11 13"/>
+      </svg>
+    );
+
+    const Clock = ({ size = 24, className = '' }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+    );
+
+    const CheckCircle = ({ size = 24, className = '' }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    );
+
+    // Supabase client setup
+    const SUPABASE_URL = 'https://nqdcmvseuuilrlfijyai.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5xZGNtdnNldXVpbHJsZmlqeWFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ5NTA4NDIsImV4cCI6MjA4MDUyNjg0Mn0.cwTeBZ_qdtmJSLwWM3eXgRYlAsrRFFQfCyKSlvjo__Q';
+
+    const supabase = {
+      async fetch(endpoint, options = {}) {
+        const response = await fetch(`${SUPABASE_URL}${endpoint}`, {
+          ...options,
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            ...options.headers
+          }
+        });
+        return response.json();
+      }
+    };
+
+    function getUserId() {
+      try {
+        let id = localStorage.getItem('stoicUserId');
+        if (!id) {
+          id = 'user-' + crypto.randomUUID();
+          localStorage.setItem('stoicUserId', id);
+        }
+        return id;
+      } catch (e) {
+        return 'user-' + Date.now();
+      }
+    }
+
+    function formatDate(iso) {
+      if (!iso) return '—';
+      return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    const FloatingText = ({ text }) => {
+      const words = text.split(' ');
+      let charIndex = 0;
+
+      return (
+        <span>
+          {words.map((word, wordIdx) => {
+            const wordChars = word.split('').map((char) => {
+              const globalIdx = charIndex++;
+              return (
+                <span
+                  key={`char-${globalIdx}`}
+                  className="inline-block animate-fade-in-float"
+                  style={{
+                    animationDelay: `${globalIdx * 0.08}s`,
+                    animationDuration: `1s, ${5 + (globalIdx % 3)}s`,
+                    opacity: 0,
+                    willChange: 'transform, opacity',
+                    transform: 'translate3d(0, 0, 0)',
+                    backfaceVisibility: 'hidden',
+                    WebkitBackfaceVisibility: 'hidden'
+                  }}
+                >
+                  {char}
+                </span>
+              );
+            });
+
+            if (wordIdx < words.length - 1) {
+              const spaceIdx = charIndex++;
+              wordChars.push(
+                <span
+                  key={`space-${spaceIdx}`}
+                  className="inline-block"
+                  style={{ opacity: 1, width: '0.25em' }}
+                >
+                  {'\u00A0'}
+                </span>
+              );
+            }
+
+            return (
+              <span key={wordIdx} className="inline-block whitespace-nowrap">
+                {wordChars}
+              </span>
+            );
+          })}
+        </span>
+      );
+    };
+
+    function StoicWisdomApp() {
+      const quotes = [
+        {
+          text: "You have power over your mind - not outside events. Realize this, and you will find strength.",
+          author: "Marcus Aurelius"
+        },
+        {
+          text: "The impediment to action advances action. What stands in the way becomes the way.",
+          author: "Marcus Aurelius"
+        }
+      ];
+
+      const [currentQuote, setCurrentQuote] = useState(null);
+      const [savedQuotes, setSavedQuotes] = useState([]);
+      const [fadeIn, setFadeIn] = useState(true);
+      const [showRequestForm, setShowRequestForm] = useState(false);
+      const [requestText, setRequestText] = useState('');
+      const [showMyRequests, setShowMyRequests] = useState(false);
+      const [userRequests, setUserRequests] = useState([]);
+      const [requestsLoading, setRequestsLoading] = useState(false);
+
+      useEffect(() => {
+        const today = new Date().toDateString();
+        const stored = {};
+        try {
+          const data = localStorage.getItem('stoicWisdom');
+          if (data) Object.assign(stored, JSON.parse(data));
+        } catch (e) {}
+
+        if (stored.date === today && stored.quote) {
+          setCurrentQuote(stored.quote);
+        } else {
+          const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+          setCurrentQuote(randomQuote);
+          try {
+            localStorage.setItem('stoicWisdom', JSON.stringify({ date: today, quote: randomQuote }));
+          } catch (e) {}
+        }
+
+        try {
+          const saved = localStorage.getItem('savedQuotes');
+          setSavedQuotes(saved ? JSON.parse(saved) : []);
+        } catch (e) {
+          setSavedQuotes([]);
+        }
+
+        setFadeIn(true);
+      }, []);
+
+      const loadUserRequests = async () => {
+        setRequestsLoading(true);
+        try {
+          const userId = getUserId();
+          const data = await supabase.fetch(
+            `/rest/v1/wisdom_requests?user_id=eq.${encodeURIComponent(userId)}&order=submitted_at.desc`
+          );
+          setUserRequests(Array.isArray(data) ? data : []);
+        } catch (e) {
+          console.error('Failed to load requests:', e);
+        } finally {
+          setRequestsLoading(false);
+        }
+      };
+
+      useEffect(() => {
+        if (showMyRequests) loadUserRequests();
+      }, [showMyRequests]);
+
+      const getNewQuote = () => {
+        setFadeIn(false);
+        setTimeout(() => {
+          const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+          setCurrentQuote(randomQuote);
+          setFadeIn(true);
+        }, 500);
+      };
+
+      const saveQuote = () => {
+        if (currentQuote && !savedQuotes.find(q => q.text === currentQuote.text)) {
+          const updated = [...savedQuotes, currentQuote];
+          setSavedQuotes(updated);
+          try { localStorage.setItem('savedQuotes', JSON.stringify(updated)); } catch (e) {}
+        }
+      };
+
+      const deleteQuote = (indexToDelete) => {
+        const updated = savedQuotes.filter((_, idx) => idx !== indexToDelete);
+        setSavedQuotes(updated);
+        try { localStorage.setItem('savedQuotes', JSON.stringify(updated)); } catch (e) {}
+      };
+
+      const clearAllQuotes = () => {
+        setSavedQuotes([]);
+        try { localStorage.setItem('savedQuotes', JSON.stringify([])); } catch (e) {}
+      };
+
+      const handleRequestSubmit = async (e) => {
+        e.preventDefault();
+        if (!requestText.trim()) return;
+        try {
+          const payload = { question: requestText, user_id: getUserId(), status: 'pending' };
+          const response = await supabase.fetch('/rest/v1/wisdom_requests', {
+            method: 'POST',
+            body: JSON.stringify(payload)
+          });
+          if (response && response.error) {
+            alert('Failed to submit: ' + response.error.message);
+            return;
+          }
+          alert('Your request has been received.');
+          setRequestText('');
+          setShowRequestForm(false);
+          setShowMyRequests(true);
+        } catch (error) {
+          alert('Submission failed: ' + error.message);
+        }
+      };
+
+      if (!currentQuote) return null;
+
+      return (
+        <div className="min-h-screen bg-zinc-900 text-zinc-100 flex flex-col">
+          <style>{`
+            @keyframes float {
+              0%, 100% { transform: translate3d(0, 0, 0); }
+              33% { transform: translate3d(1px, -2px, 0); }
+              66% { transform: translate3d(-1px, -1px, 0); }
+            }
+            @keyframes fadeIn {
+              from { opacity: 0; transform: translate3d(0, 3px, 0); }
+              to { opacity: 1; transform: translate3d(0, 0, 0); }
+            }
+            .animate-fade-in-float {
+              animation: fadeIn 1s ease-out forwards, float ease-in-out infinite;
+              animation-delay: inherit, 1s;
+            }
+            * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+          `}</style>
+
+          <header className="border-b border-zinc-800 px-6 py-4">
+            <div className="flex justify-between items-center">
+              <h1 className="text-2xl font-bold tracking-tight">DAILY STOIC</h1>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => { setShowMyRequests(!showMyRequests); setShowRequestForm(false); }}
+                  className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 transition-colors font-medium text-sm flex items-center gap-2"
+                >
+                  <MessageSquare size={18} />
+                  My Requests
+                </button>
+                <button
+                  onClick={() => { setShowRequestForm(!showRequestForm); setShowMyRequests(false); }}
+                  className="px-4 py-2 bg-amber-900 hover:bg-amber-800 border border-amber-700 transition-colors font-medium text-sm"
+                >
+                  Request Wisdom
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <main className="flex-1 flex items-center justify-center px-6 py-12">
+            {showRequestForm ? (
+              <div className="max-w-2xl w-full">
+                <div className="bg-zinc-800 border border-zinc-700 p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <MessageSquare className="text-amber-500" size={32} />
+                    <div>
+                      <h2 className="text-2xl font-bold">Request Personal Wisdom</h2>
+                      <p className="text-zinc-400 text-sm mt-1">Premium Feature</p>
+                    </div>
+                  </div>
+                  <form onSubmit={handleRequestSubmit}>
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium mb-2 text-zinc-300">
+                        What challenge or question are you facing?
+                      </label>
+                      <textarea
+                        value={requestText}
+                        onChange={(e) => setRequestText(e.target.value)}
+                        className="w-full bg-zinc-900 border border-zinc-700 p-4 text-zinc-100 min-h-[200px] focus:outline-none focus:border-amber-700"
+                        placeholder="Share your situation. Be specific about what you're struggling with or seeking guidance on..."
+                        required
+                      />
+                    </div>
+                    <div className="bg-zinc-900 border border-zinc-700 p-4 mb-6">
+                      <p className="text-sm text-zinc-400 mb-2">
+                        <strong className="text-zinc-300">What happens next:</strong>
+                      </p>
+                      <ul className="text-sm text-zinc-400 space-y-1 list-disc list-inside">
+                        <li>Your request is reviewed by our wisdom curators</li>
+                        <li>You'll receive a personalized response within 24-48 hours</li>
+                        <li>Responses blend classical stoicism with modern insight</li>
+                        <li>All exchanges remain completely private</li>
+                      </ul>
+                    </div>
+                    <div className="flex gap-4">
+                      <button
+                        type="submit"
+                        className="flex-1 px-6 py-3 bg-amber-900 hover:bg-amber-800 border border-amber-700 transition-colors font-medium flex items-center justify-center gap-2"
+                      >
+                        <Send size={18} />
+                        Submit Request
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShowRequestForm(false)}
+                        className="px-6 py-3 bg-zinc-700 hover:bg-zinc-600 border border-zinc-600 transition-colors font-medium"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            ) : showMyRequests ? (
+              <div className="max-w-4xl w-full">
+                <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <MessageSquare size={28} />
+                  My Wisdom Requests
+                </h2>
+                {requestsLoading ? (
+                  <div className="bg-zinc-800 border border-zinc-700 p-12 text-center text-zinc-500">
+                    Loading…
+                  </div>
+                ) : userRequests.length === 0 ? (
+                  <div className="bg-zinc-800 border border-zinc-700 p-12 text-center">
+                    <MessageSquare className="mx-auto mb-4 text-zinc-600" size={48} />
+                    <p className="text-zinc-400">You haven't submitted any requests yet.</p>
+                    <button
+                      onClick={() => { setShowMyRequests(false); setShowRequestForm(true); }}
+                      className="mt-4 px-6 py-2 bg-amber-900 hover:bg-amber-800 border border-amber-700 transition-colors font-medium"
+                    >
+                      Request Wisdom
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    {userRequests.map((request) => (
+                      <div key={request.id} className="bg-zinc-800 border border-zinc-700 p-6">
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex items-center gap-2">
+                            {request.status === 'pending' ? (
+                              <>
+                                <Clock className="text-amber-500" size={20} />
+                                <span className="text-amber-500 font-medium">Pending</span>
+                              </>
+                            ) : (
+                              <>
+                                <CheckCircle className="text-green-500" size={20} />
+                                <span className="text-green-500 font-medium">Answered</span>
+                              </>
+                            )}
+                          </div>
+                          <span className="text-sm text-zinc-500">
+                            Submitted {formatDate(request.submitted_at)}
+                          </span>
+                        </div>
+                        <div className="mb-4">
+                          <h3 className="text-sm font-medium text-zinc-400 mb-2">YOUR QUESTION:</h3>
+                          <p className="text-zinc-200">{request.question}</p>
+                        </div>
+                        {request.status === 'answered' && (
+                          <div className="border-t border-zinc-700 pt-4 mt-4">
+                            <h3 className="text-sm font-medium text-zinc-400 mb-2">RESPONSE:</h3>
+                            <p className="text-zinc-100 leading-relaxed">{request.response}</p>
+                            <p className="text-sm text-zinc-500 mt-2">
+                              Answered {formatDate(request.answered_at)}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="max-w-3xl w-full">
+                <blockquote className={`space-y-8 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
+                  <p className="text-3xl md:text-4xl font-bold leading-tight text-zinc-100">
+                    <FloatingText key={currentQuote.text} text={currentQuote.text} />
+                  </p>
+                  <footer className="text-xl text-zinc-500 font-medium">
+                    — {currentQuote.author}
+                  </footer>
+                </blockquote>
+                <div className="flex gap-4 mt-12">
+                  <button
+                    onClick={getNewQuote}
+                    className="flex items-center gap-2 px-6 py-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 transition-colors font-medium"
+                  >
+                    <RefreshCw size={20} />
+                    New Quote
+                  </button>
+                  <button
+                    onClick={saveQuote}
+                    className="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 transition-colors font-medium"
+                  >
+                    Save Quote
+                  </button>
+                </div>
+              </div>
+            )}
+          </main>
+
+          {savedQuotes.length > 0 && (
+            <aside className="border-t border-zinc-800 px-6 py-8">
+              <div className="flex justify-between items-center mb-4 max-w-3xl">
+                <h2 className="text-lg font-bold text-zinc-400">SAVED WISDOM</h2>
+                <button
+                  onClick={clearAllQuotes}
+                  className="px-4 py-2 text-sm bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 transition-colors font-medium text-zinc-400 hover:text-zinc-200"
+                >
+                  Clear All
+                </button>
+              </div>
+              <div className="space-y-4 max-w-3xl">
+                {savedQuotes.map((quote, idx) => (
+                  <div key={idx} className="border-l-2 border-zinc-700 pl-4 py-2 flex justify-between items-start gap-4">
+                    <div className="flex-1">
+                      <p className="text-zinc-300 mb-1">{quote.text}</p>
+                      <p className="text-sm text-zinc-600">— {quote.author}</p>
+                    </div>
+                    <button
+                      onClick={() => deleteQuote(idx)}
+                      className="flex-shrink-0 p-2 text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800 transition-colors rounded"
+                      aria-label="Delete quote"
+                    >
+                      <X size={18} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </aside>
+          )}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<StoicWisdomApp />);
+  </script>
+</body>
+</html>
