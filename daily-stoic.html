@@ -80,9 +80,9 @@
 
     function getUserId() {
       try {
-        let id = localStorage.getItem('stoicUserId');
+        let id = localStorage.getItem('stoicUserId'); if (id && id.startsWith('user-')) { id = null; localStorage.removeItem('stoicUserId'); }
         if (!id) {
-          id = 'user-' + crypto.randomUUID();
+          id = crypto.randomUUID();
           localStorage.setItem('stoicUserId', id);
         }
         return id;
@@ -248,12 +248,12 @@
         if (!requestText.trim()) return;
         try {
           const payload = { question: requestText, user_id: getUserId(), status: 'pending' };
-          const response = await supabase.fetch('/rest/v1/wisdom_requests', {
+          const response = await supabase.fetch('/rest/v1/wisdom_requests', { headers: { 'Prefer': 'return=representation' },
             method: 'POST',
             body: JSON.stringify(payload)
           });
-          if (response && response.error) {
-            alert('Failed to submit: ' + response.error.message);
+          if (response && (response.error || response.code || response.message)) {
+            alert('Failed to submit: ' + (response.message || response.error?.message || JSON.stringify(response)));
             return;
           }
           alert('Your request has been received.');
