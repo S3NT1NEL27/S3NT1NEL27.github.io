@@ -1,3 +1,35 @@
+<!--
+  CLAUDE_NOTES | Last updated: 2026-02-25
+
+  PROJECT: Daily Stoic — Wisdom Request App
+  REPO: S3NT1NEL27/S3NT1NEL27.github.io
+  LIVE URL: https://s3nt1nel27.github.io/daily-stoic.html
+  LOCAL CLONE: C:\Users\edwar\Documents\S3NT1NEL27.github.io\
+
+  SUPABASE: nqdcmvseuuilrlfijyai.supabase.co
+  TABLE: wisdom_requests (id, user_id uuid, question, response, status, submitted_at, answered_at, share_offered, shared_wisdom_id)
+  RLS POLICIES:
+    - Allow anonymous submissions: INSERT, public
+    - Users view own requests: SELECT, WHERE user_id = auth.uid()
+    - Anonymous users can view their own requests: SELECT, auth.role() = 'anon'
+    - Curator can read all requests: SELECT, USING(true)
+    - Curator can update requests: UPDATE, USING(true)
+
+  CURATOR DASHBOARD: C:\Users\edwar\Desktop\Sentinel\curator-dashboard.html
+  Run it with: python -m http.server 8080 from that folder, then open http://localhost:8080/curator-dashboard.html
+
+  USER IDENTITY: Anonymous UUID generated on first load, stored in localStorage as 'stoicUserId'.
+  No real auth — user loses history if localStorage is cleared.
+
+  KNOWN ISSUES / TODO:
+  - answered_at not auto-set when curator edits via Supabase Table Editor directly (use the dashboard instead)
+  - Only 2 hardcoded quotes — needs a larger quote pool or a Supabase quotes table
+  - No real auth — user_id is anon UUID in localStorage; replacing with supabase.auth would require getUserId() rewrite
+  - No email/push notification when a request is answered
+
+  DEPLOY WORKFLOW:
+  Edit this file → git add daily-stoic.html → git commit → git push → live in ~1 min
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
