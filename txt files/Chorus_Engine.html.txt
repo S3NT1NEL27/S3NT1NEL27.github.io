@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chorus Engine - Accessible Database</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+        h1 {
+            color: #00ff41;
+            text-align: center;
+            border-bottom: 2px solid #00ff41;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #2a2a2a;
+            color: #00ff41;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background-color: #252525;
+        }
+        tr:hover {
+            background-color: #3a3a3a;
+        }
+        .url-cell {
+            max-width: 200px;
+            word-break: break-all;
+            font-size: 12px;
+        }
+        .caption-cell {
+            max-width: 300px;
+            font-size: 12px;
+        }
+
+        .emotion-cell {
+            max-width: 150px;
+            font-weight: bold;
+            color: #00aaff;
+        }
+    </style>
+</head>
+<body>
+    <h1>CHORUS ENGINE - ACCESSIBLE DATABASE</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image URL</th>
+                <th>AI Caption Aggregate</th>
+                <th>User Emotional State</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>00002</td>
+                <td class="url-cell"><a href="https://i.ibb.co/1Fyqx8n/umbrella-rain-fire-women-wallpaper-preview.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A surreal scene depicts a woman in a flowing dark green dress standing in heavy pouring rain on a neon-lit urban city street at night, holding a tattered umbrella partially engulfed in blooming flames and embers that replace or erupt from her head. Floating umbrellas and smoke fill the foreground against a fiery skyline backdrop, rendered in muted sepia-green-brown tones that evoke tense, ominous ethereal chaos.</td>
+                <td class="emotion-cell">Imaginative, curious, mesmerized</td>
+            </tr>
+            <tr>
+                <td>00003</td>
+                <td class="url-cell"><a href="https://i.ibb.co/0jXHn7D/sin-city-008-cmyk.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A high-contrast black-and-white, noir-style image shows a muscular man in a white tank top, his body marked with many small white bandages or tape pieces, standing in a dim, tiled room and gesturing toward a woman with short dark hair whose face is partly obscured or downturned. The stark lighting, dramatic shadows, and close proximity of two figures create a tense, somber, and gritty atmosphere.</td>
+                <td class="emotion-cell">Ashamed, embarassed, betrayed</td>
+            </tr>
+            <tr>
+                <td>00004</td>
+                <td class="url-cell"><a href="https://i.ibb.co/G4mM6Vrh/Screenshot-20220516-135123-Instagram.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A small golden retriever puppy wearing a harness or bandana sits on a grassy patch with its mouth open and tongue out while a monarch butterfly perches on its nose, giving it a wide‑eyed, happy look. Behind the puppy is a bright, lush garden scene with green foliage, patches of dirt, and clusters of light purple or pink flowers, creating a cheerful outdoor mood.</td>
+                <td class="emotion-cell">Elation, happiness, full of wonder</td>
+            </tr>
+            <tr>
+                <td>00005</td>
+                <td class="url-cell"><a href="https://i.ibb.co/jPRKpMbz/Screenshot-20240929-000939-Instagram.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A detailed monochrome illustration on a solid black background shows a human skeleton kneeling and hunched forward, closely embracing a smaller skeletal figure (dog) that appears like a second spine, ribcage, or creature held to its chest. White typewriter-style text on the left reads "After all this time, you waited."</td>
+                <td class="emotion-cell">Peaceful, accepting, grateful</td>
+            </tr>
+            <tr>
+                <td>00006</td>
+                <td class="url-cell"><a href="https://i.ibb.co/zWs6TLMQ/Screenshot-20220505-162124-Instagram.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A dramatic comic-style illustration shows Batman in his dark cape and cowl kneeling in a rain‑soaked alley or rooftop at night, cradling a distressed, possibly injured young person in purple clothing in his arms. Heavy rain, wet pavement, lightning, and moody green and blue lighting with deep shadows create an intense, somber, and protective atmosphere.</td>
+                <td class="emotion-cell">Morose, sad, empathy, sympathy</td>
+            </tr>
+            <tr>
+                <td>00007</td>
+                <td class="url-cell"><a href="https://i.ibb.co/zWtQ2qfx/negative-space-forest-road-768x1152.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A paved two-lane road with double yellow center lines and small reflectors curves through a dense forest of tall, straight redwood or evergreen trees, flanked by green foliage and occasional signposts. Natural daylight filters in dappled patches through high canopy, creating a serene, peaceful, and secluded corridor in deep greens, browns, and grays.</td>
+                <td class="emotion-cell">anticipation, eager, freedom</td>
+            </tr>
+            <tr>
+                <td>00008</td>
+                <td class="url-cell"><a href="https://i.ibb.co/RTxbHv9V/1720973539358765.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A classical oil painting shows a medieval knight in full silver armor lying motionless on a bier or table draped with an ornate blue cloth embroidered with gold patterns, hands crossed over chest and a laurel wreath on helmet. Beside the bier, a large brown hound sits on the tiled floor, head and gaze lifted toward the knight's hand or face, its loyal, mournful posture and dim, shadowy interior creating a quiet, somber mood.</td>
+                <td class="emotion-cell">Mournful, loyal, appreciative</td>
+            </tr>
+            <tr>
+                <td>00009</td>
+                <td class="url-cell"><a href="https://i.ibb.co/5W1dj30q/1712453690256379.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A side-by-side split image compares a profile view of a young woman with braided or pulled-back blonde or light-brown hair, wearing a green and black sports or athletic jersey, facing right against an outdoor blue sky or simple neutral background on the left, to a white marble classical bust of a female figure with wavy styled hair in a bun and draped clothing, displayed indoors with a "868" label on a dark pedestal against a neutral tone background on the right. Both figures emphasize similar facial features, hairstyles, side profiles, and neck areas—sometimes obscured by blurs—evoking a mood of striking physical or historical resemblance and quiet contemplation in natural colors on the left and muted neutrals on the right.</td>
+                <td class="emotion-cell">Ageless beauty, inherited grace, historical reverence</td>
+            </tr>
+            <tr>
+                <td>00010</td>
+                <td class="url-cell"><a href="https://i.ibb.co/bjRyrV2q/1700912838448349.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A neoclassical white marble sculpture or statue depicts a muscular, curly-haired nude male figure standing and cradling or carrying a limp, long-haired nude female figure in his arms, with one hand gripping her thigh and the other supporting her back as she clutches a flowing draped cloth cascading downward from her waist. Set against a neutral arched or architectural indoor background in shades of gray and white with subtle shadows, high-contrast grayscale, and dramatic lighting emphasizing smooth lines and sculptural details.</td>
+                <td class="emotion-cell">Sorrow, loss, desperation</td>
+            </tr>
+            <tr>
+                <td>00003</td>
+                <td class="url-cell"><a href="https://i.ibb.co/0jXHn7D/sin-city-008-cmyk.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A high-contrast black-and-white, noir-style image shows a muscular man in a white tank top, his body marked with many small white bandages or tape pieces, standing in a dim, tiled room and gesturing toward a woman with short dark hair whose face is partly obscured or downturned. The stark lighting, dramatic shadows, and close proximity of two figures create a tense, somber, and gritty atmosphere.</td>
+                <td class="desc-cell">High-contrast black-and-white noir image showing muscular man in white tank top with white bandages, standing in dim tiled room gesturing toward woman with short dark hair, face obscured. Stark lighting, dramatic shadows, close proximity creates tense, somber, gritty atmosphere.</td>
+                <td class="emotion-cell">Ashamed, embarassed, betrayed</td>
+            </tr>
+            <tr>
+                <td>00004</td>
+                <td class="url-cell"><a href="https://i.ibb.co/G4mM6Vrh/Screenshot-20220516-135123-Instagram.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A small golden retriever puppy wearing a harness or bandana sits on a grassy patch with its mouth open and tongue out while a monarch butterfly perches on its nose, giving it a wide‑eyed, happy look. Behind the puppy is a bright, lush garden scene with green foliage, patches of dirt, and clusters of light purple or pink flowers, creating a cheerful outdoor mood.</td>
+                <td class="desc-cell">Small golden retriever puppy with harness/bandana on grassy patch, mouth open, tongue out, monarch butterfly perched on nose. Wide-eyed, happy look. Bright garden background with green foliage, dirt patches, light purple/pink flowers, cheerful outdoor mood.</td>
+                <td class="emotion-cell">Elation, happiness, full of wonder</td>
+            </tr>
+            <tr>
+                <td>00005</td>
+                <td class="url-cell"><a href="https://i.ibb.co/jPRKpMbz/Screenshot-20240929-000939-Instagram.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A detailed monochrome illustration on a solid black background shows a human skeleton kneeling and hunched forward, closely embracing a smaller skeletal figure (dog) that appears like a second spine, ribcage, or creature held to its chest. White typewriter-style text on the left reads "After all this time, you waited."</td>
+                <td class="desc-cell">Monochrome illustration on black background showing human skeleton kneeling, embracing smaller skeletal figure (dog) appearing as second spine/ribcage. White typewriter text on left: "After all this time, you waited."</td>
+                <td class="emotion-cell">Peaceful, accepting, grateful</td>
+            </tr>
+            <tr>
+                <td>00006</td>
+                <td class="url-cell"><a href="https://i.ibb.co/zWs6TLMQ/Screenshot-20220505-162124-Instagram.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A dramatic comic-style illustration shows Batman in his dark cape and cowl kneeling in a rain‑soaked alley or rooftop at night, cradling a distressed, possibly injured young person in purple clothing in his arms. Heavy rain, wet pavement, lightning, and moody green and blue lighting with deep shadows create an intense, somber, and protective atmosphere.</td>
+                <td class="desc-cell">Dramatic comic illustration showing Batman in dark cape/cowl kneeling in rain-soaked alley/rooftop at night, cradling distressed young person in purple clothing. Heavy rain, wet pavement, lightning, moody green/blue lighting with deep shadows, intense somber protective atmosphere.</td>
+                <td class="emotion-cell">Morose, sad, empathy, sympathy</td>
+            </tr>
+            <tr>
+                <td>00007</td>
+                <td class="url-cell"><a href="https://i.ibb.co/zWtQ2qfx/negative-space-forest-road-768x1152.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A paved two-lane road with double yellow center lines and small reflectors curves through a dense forest of tall, straight redwood or evergreen trees, flanked by green foliage and occasional signposts. Natural daylight filters in dappled patches through high canopy, creating a serene, peaceful, and secluded corridor in deep greens, browns, and grays.</td>
+                <td class="desc-cell">Paved two-lane road with double yellow lines curving through dense forest of tall redwood/evergreen trees, flanked by green foliage and signposts. Natural daylight filters through canopy, creating serene, peaceful secluded corridor in deep greens, browns, grays.</td>
+                <td class="emotion-cell">anticipation, eager, freedom</td>
+            </tr>
+            <tr>
+                <td>00008</td>
+                <td class="url-cell"><a href="https://i.ibb.co/RTxbHv9V/1720973539358765.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A classical oil painting shows a medieval knight in full silver armor lying motionless on a bier or table draped with an ornate blue cloth embroidered with gold patterns, hands crossed over chest and a laurel wreath on helmet. Beside the bier, a large brown hound sits on the tiled floor, head and gaze lifted toward the knight's hand or face, its loyal, mournful posture and dim, shadowy interior creating a quiet, somber mood.</td>
+                <td class="desc-cell">Classical oil painting showing medieval knight in full silver armor lying motionless on bier/table draped with ornate blue cloth with gold patterns, hands crossed, laurel wreath on helmet. Brown hound sits on tiled floor, head lifted toward knight's hand/face, loyal mournful posture, dim shadowy interior, quiet somber mood.</td>
+                <td class="emotion-cell">Mournful, loyal, appreciative</td>
+            </tr>
+            <tr>
+                <td>00009</td>
+                <td class="url-cell"><a href="https://i.ibb.co/5W1dj30q/1712453690256379.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A side-by-side split image compares a profile view of a young woman with braided or pulled-back blonde or light-brown hair, wearing a green and black sports or athletic jersey, facing right against an outdoor blue sky or simple neutral background on the left, to a white marble classical bust of a female figure with wavy styled hair in a bun and draped clothing, displayed indoors with a "868" label on a dark pedestal against a neutral tone background on the right. Both figures emphasize similar facial features, hairstyles, side profiles, and neck areas—sometimes obscured by blurs—evoking a mood of striking physical or historical resemblance and quiet contemplation in natural colors on the left and muted neutrals on the right.</td>
+                <td class="desc-cell">Side-by-side split image comparing profile of young woman with braided blonde/light-brown hair in green/black sports jersey (facing right, outdoor background) to white marble classical bust with wavy hair in bun, draped clothing, "868" label on dark pedestal (right). Both emphasize similar facial features, hairstyles, side profiles, neck areas. Natural colors left, muted neutrals right.</td>
+                <td class="emotion-cell">Ageless beauty, inherited grace, historical reverence</td>
+            </tr>
+            <tr>
+                <td>00010</td>
+                <td class="url-cell"><a href="https://i.ibb.co/bjRyrV2q/1700912838448349.jpg" target="_blank">View Image</a></td>
+                <td class="caption-cell">A neoclassical white marble sculpture or statue depicts a muscular, curly-haired nude male figure standing and cradling or carrying a limp, long-haired nude female figure in his arms, with one hand gripping her thigh and the other supporting her back as she clutches a flowing draped cloth cascading downward from the waist. Set against a neutral arched or architectural indoor background in shades of gray and white with subtle shadows, high-contrast grayscale, and dramatic lighting emphasizing smooth lines and sculptural details.</td>
+                <td class="desc-cell">Neoclassical white marble sculpture showing muscular, curly-haired nude male figure standing, cradling/carrying limp long-haired nude female figure in arms, one hand gripping thigh, other supporting back, she clutches flowing draped cloth cascading from waist. Neutral arched architectural background, gray/white shades, subtle shadows, high-contrast grayscale, dramatic lighting emphasizing smooth lines and sculptural details.</td>
+                <td class="emotion-cell">Sorrow, loss, desperation</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

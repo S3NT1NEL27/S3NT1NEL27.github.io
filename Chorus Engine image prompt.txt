@@ -1,0 +1,1 @@
+Describe this image in 1-2 concise, factual sentences. Focus only on visible content, objects, people, actions, setting, colors, and mood. Output ONLY the caption—no questions, suggestions, analysis, or additional text
