@@ -1,0 +1,1090 @@
+﻿=== DRIVER STATE DUMP ===
+Generated: 2026-04-02 09:11:39
+Compare this file against a pre-update dump to catch renamed or new problem drivers.
+Key things to look for:
+  - New entries in 'Running kernel drivers' that weren't there before
+  - Kernel drivers with paths outside C:\WINDOWS\System32\drivers\ (suspicious)
+  - Recently modified .sys files (LastWriteTime matching the update date)
+  - New Device Manager errors (ERROR or DEGRADED status)
+  - New AMD/ASUS services that are Running or set to Auto start
+
+--- All registered kernel drivers (name / state / startmode / path) ---
+  1394ohci                                      Stopped    Manual       C:\WINDOWS\system32\drivers\1394ohci.sys
+  3ware                                         Stopped    Manual       C:\WINDOWS\system32\drivers\3ware.sys
+  ACPI                                          Running    Boot         C:\WINDOWS\system32\drivers\ACPI.sys
+  AcpiAudioCompositorInbox                      Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\acpiaudiocompositor.inf_amd64_047f553a6f70b169\AcpiAudioCompositor.sys
+  AcpiDev                                       Stopped    Manual       C:\WINDOWS\system32\drivers\AcpiDev.sys
+  acpiex                                        Running    Boot         C:\WINDOWS\system32\Drivers\acpiex.sys
+  acpipagr                                      Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\acpipagr.inf_amd64_d1093347a27ff89c\acpipagr.sys
+  AcpiPmi                                       Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\acpipmi.inf_amd64_3ced06eb61dcc792\acpipmi.sys
+  acpitime                                      Running    Manual       C:\WINDOWS\system32\drivers\acpitime.sys
+  Acx01000                                      Running    Manual       C:\WINDOWS\system32\drivers\Acx01000.sys
+  ADP80XX                                       Stopped    Manual       C:\WINDOWS\system32\drivers\ADP80XX.SYS
+  AFD                                           Running    System       C:\WINDOWS\system32\drivers\afd.sys
+  afunix                                        Running    System       C:\WINDOWS\system32\drivers\afunix.sys
+  ahcache                                       Running    System       C:\WINDOWS\system32\DRIVERS\ahcache.sys
+  amdacpbus                                     Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdacpbus.inf_amd64_1ef8c0c88c1e246e\amdacpbus.sys
+  amdfendr                                      Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdfendr.inf_amd64_bea53a1d416fbcfa\amdfendr.sys
+  amdfendrmgr                                   Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdfendr.inf_amd64_bea53a1d416fbcfa\amdfendrmgr.sys
+  amdgpio2                                      Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdgpio2.inf_amd64_e3ba65168b9dbb29\amdgpio2.sys
+  amdi2c                                        Running    Manual       C:\WINDOWS\system32\drivers\amdi2c.sys
+  AmdK8                                         Stopped    Manual       C:\WINDOWS\system32\drivers\amdk8.sys
+  AmdMicroPEP                                   Running    Boot         C:\WINDOWS\system32\DriverStore\FileRepository\amdmicropep.inf_amd64_0ee9b60764bf0bba\AmdMicroPEP.sys
+  amdpmf                                        Running    Manual       C:\WINDOWS\system32\drivers\amdpmf.sys
+  AmdPpkg                                       Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdppkg.inf_amd64_f57cfc457aa3e60b\AmdPpkg.sys
+  AmdPPM                                        Running    Manual       C:\WINDOWS\system32\drivers\amdppm.sys
+  amdpsp                                        Running    Boot         C:\WINDOWS\system32\drivers\amdpsp.sys
+  AMDSAFD                                       Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdsafd.inf_amd64_d4de13a10f2586d0\amdsafd.sys
+  amdsata                                       Stopped    Manual       C:\WINDOWS\system32\drivers\amdsata.sys
+  amdsbs                                        Stopped    Manual       C:\WINDOWS\system32\drivers\amdsbs.sys
+  amdsdwc                                       Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdsdwc.inf_amd64_8ff5662e24d13f62\amdsdwc.sys
+  amdsfhkmdf                                    Running    System       C:\WINDOWS\system32\drivers\amdsfhkmdf.sys
+  amduw23g-198974-eda2a421                      Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\u0198974.inf_amd64_dcac9659486b668a\B025819\amdkmdag.sys
+  amdwps                                        Running    Boot         C:\WINDOWS\system32\drivers\amdwps.sys
+  amdxata                                       Stopped    Manual       C:\WINDOWS\system32\drivers\amdxata.sys
+  AppID                                         Stopped    Manual       C:\WINDOWS\system32\drivers\appid.sys
+  AppleKmdfFilter                               Stopped    Manual       C:\WINDOWS\system32\drivers\AppleKmdfFilter.sys
+  AppleLowerFilter                              Stopped    Manual       C:\WINDOWS\system32\drivers\AppleLowerFilter.sys
+  AppleSSD                                      Stopped    Manual       C:\WINDOWS\system32\drivers\AppleSSD.sys
+  applockerfltr                                 Stopped    Manual       C:\WINDOWS\system32\drivers\applockerfltr.sys
+  arcsas                                        Stopped    Manual       C:\WINDOWS\system32\drivers\arcsas.sys
+  AsusPTPDrv                                    Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\asusptpfilter.inf_amd64_ebab82ab1cf6be11\AsusPTPFilter.sys
+  AsusSAIO                                      Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\asussci2.inf_amd64_d5b92bc7afd7593a\ASUSSystemAnalysis\AsusSAIO.sys
+  AsyncMac                                      Stopped    Manual       C:\WINDOWS\system32\drivers\asyncmac.sys
+  atapi                                         Stopped    Manual       C:\WINDOWS\system32\drivers\atapi.sys
+  AtiHDAudioService                             Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\atihdwt6.inf_amd64_76dcade1eff04982\AtihdWT6.sys
+  ATKWMIACPIIO                                  Running    System       C:\WINDOWS\system32\DriverStore\FileRepository\asussci2.inf_amd64_d5b92bc7afd7593a\ASUSOptimization\AsusWmiAcpi.sys
+  b06bdrv                                       Stopped    Manual       C:\WINDOWS\system32\drivers\bxvbda.sys
+  bam                                           Running    System       C:\WINDOWS\system32\drivers\bam.sys
+  BasicDisplay                                  Running    System       C:\WINDOWS\system32\DriverStore\FileRepository\basicdisplay.inf_amd64_2753efdbb0d9a226\BasicDisplay.sys
+  BasicRender                                   Running    System       C:\WINDOWS\system32\DriverStore\FileRepository\basicrender.inf_amd64_17141d297b334aa5\BasicRender.sys
+  bcmfn2                                        Stopped    Manual       C:\WINDOWS\system32\drivers\bcmfn2.sys
+  Beep                                          Running    System       C:\WINDOWS\system32\drivers\Beep.sys
+  bfs                                           Running    Auto         C:\WINDOWS\system32\drivers\bfs.sys
+  bindflt                                       Running    Auto         C:\WINDOWS\system32\drivers\bindflt.sys
+  bowser                                        Running    Manual       C:\WINDOWS\system32\DRIVERS\bowser.sys
+  BthA2dp                                       Stopped    Manual       C:\WINDOWS\system32\drivers\BthA2dp.sys
+  BthEnum                                       Running    Manual       C:\WINDOWS\system32\drivers\BthEnum.sys
+  BthHFEnum                                     Stopped    Manual       C:\WINDOWS\system32\drivers\bthhfenum.sys
+  BthLEEnum                                     Running    Manual       C:\WINDOWS\system32\drivers\Microsoft.Bluetooth.Legacy.LEEnumerator.sys
+  BthMini                                       Stopped    Manual       C:\WINDOWS\system32\drivers\BTHMINI.sys
+  BTHMODEM                                      Stopped    Manual       C:\WINDOWS\system32\drivers\bthmodem.sys
+  BthPan                                        Running    Manual       C:\WINDOWS\system32\drivers\bthpan.sys
+  BTHPORT                                       Running    Manual       C:\WINDOWS\system32\drivers\BTHport.sys
+  BTHUSB                                        Running    Manual       C:\WINDOWS\system32\drivers\BTHUSB.sys
+  bttflt                                        Stopped    Manual       C:\WINDOWS\system32\drivers\bttflt.sys
+  buttonconverter                               Stopped    Manual       C:\WINDOWS\system32\drivers\buttonconverter.sys
+  CAD                                           Running    Manual       C:\WINDOWS\system32\drivers\CAD.sys
+  CDD                                           Running    Manual       C:\WINDOWS\system32\cdd.dll
+  cdfs                                          Stopped    Disabled     C:\WINDOWS\system32\DRIVERS\cdfs.sys
+  cdrom                                         Running    System       C:\WINDOWS\system32\drivers\cdrom.sys
+  cht4iscsi                                     Stopped    Manual       C:\WINDOWS\system32\drivers\cht4sx64.sys
+  cht4vbd                                       Stopped    Manual       C:\WINDOWS\system32\drivers\cht4vx64.sys
+  CimFS                                         Running    System       C:\WINDOWS\system32\drivers\CimFS.sys
+  circlass                                      Stopped    Manual       C:\WINDOWS\system32\drivers\circlass.sys
+  CldFlt                                        Running    Auto         C:\WINDOWS\system32\drivers\cldflt.sys
+  CLFS                                          Running    Boot         C:\WINDOWS\system32\drivers\CLFS.sys
+  CmBatt                                        Running    Manual       C:\WINDOWS\system32\drivers\CmBatt.sys
+  CNG                                           Running    Boot         C:\WINDOWS\system32\Drivers\cng.sys
+  cnghwassist                                   Stopped    Disabled     C:\WINDOWS\system32\DRIVERS\cnghwassist.sys
+  CompositeBus                                  Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\compositebus.inf_amd64_8cf6fa9d3afdfa25\CompositeBus.sys
+  condrv                                        Running    Manual       C:\WINDOWS\system32\drivers\condrv.sys
+  dam                                           Running    System       C:\WINDOWS\system32\drivers\dam.sys
+  devmap                                        Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\devmap.inf_amd64_1993197f4612e967\devmap.sys
+  Dfsc                                          Running    System       C:\WINDOWS\system32\Drivers\dfsc.sys
+  disk                                          Running    Boot         C:\WINDOWS\system32\drivers\disk.sys
+  DisplayMux                                    Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\displaymux.inf_amd64_da65a70f0c3ce0f3\DisplayMux.sys
+  dmvsc                                         Stopped    Manual       C:\WINDOWS\system32\drivers\dmvsc.sys
+  drmkaud                                       Stopped    Manual       C:\WINDOWS\system32\drivers\drmkaud.sys
+  DXGKrnl                                       Running    Boot         C:\WINDOWS\system32\drivers\dxgkrnl.sys
+  ebdrv                                         Stopped    Manual       C:\WINDOWS\system32\drivers\evbda.sys
+  ebdrv0                                        Stopped    Manual       C:\WINDOWS\system32\drivers\evbd0a.sys
+  EhStorClass                                   Running    Boot         C:\WINDOWS\system32\drivers\EhStorClass.sys
+  EhStorTcgDrv                                  Stopped    Manual       C:\WINDOWS\system32\drivers\EhStorTcgDrv.sys
+  ErrDev                                        Stopped    Manual       C:\WINDOWS\system32\drivers\errdev.sys
+  ExecutionContext                              Stopped    Manual       C:\WINDOWS\system32\Drivers\ExecutionContext.sys
+  exfat                                         Stopped    Manual       C:\WINDOWS\system32\drivers\exfat.sys
+  fastfat                                       Running    Manual       C:\WINDOWS\system32\drivers\fastfat.sys
+  fdc                                           Stopped    Manual       C:\WINDOWS\system32\drivers\fdc.sys
+  FileCrypt                                     Running    System       C:\WINDOWS\system32\drivers\filecrypt.sys
+  FileInfo                                      Running    Boot         C:\WINDOWS\system32\drivers\fileinfo.sys
+  Filetrace                                     Stopped    Manual       C:\WINDOWS\system32\drivers\filetrace.sys
+  flpydisk                                      Stopped    Manual       C:\WINDOWS\system32\drivers\flpydisk.sys
+  FltMgr                                        Running    Boot         C:\WINDOWS\system32\drivers\fltmgr.sys
+  FsDepends                                     Stopped    Manual       C:\WINDOWS\system32\drivers\FsDepends.sys
+  fvevol                                        Running    Boot         C:\WINDOWS\system32\DRIVERS\fvevol.sys
+  gameflt                                       Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\gameflt.inf_amd64_152b7ad8bf20bdc5\gameflt.sys
+  gencounter                                    Stopped    Manual       C:\WINDOWS\system32\drivers\vmgencounter.sys
+  genericusbfn                                  Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\genericusbfn.inf_amd64_71c810ddc0116541\genericusbfn.sys
+  GeneStor                                      Stopped    Manual       C:\WINDOWS\system32\drivers\GeneStor.sys
+  GenPass                                       Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\genpass.inf_amd64_0c82d80c9252c9bd\genpass.sys
+  GPIOClx0101                                   Running    Manual       C:\WINDOWS\system32\Drivers\msgpioclx.sys
+  HdAudAddService                               Stopped    Manual       C:\WINDOWS\system32\drivers\HdAudio.sys
+  HDAudBus                                      Running    Manual       C:\WINDOWS\system32\drivers\HDAudBus.sys
+  HidBatt                                       Stopped    Manual       C:\WINDOWS\system32\drivers\HidBatt.sys
+  HidBth                                        Stopped    Manual       C:\WINDOWS\system32\drivers\hidbth.sys
+  hidi2c                                        Running    Manual       C:\WINDOWS\system32\drivers\hidi2c.sys
+  hidinterrupt                                  Stopped    Manual       C:\WINDOWS\system32\drivers\hidinterrupt.sys
+  HidIr                                         Stopped    Manual       C:\WINDOWS\system32\drivers\hidir.sys
+  hidspi                                        Stopped    Manual       C:\WINDOWS\system32\drivers\hidspi.sys
+  HidSpiCx                                      Stopped    Manual       C:\WINDOWS\system32\drivers\HidSpiCx.sys
+  HidUsb                                        Running    Manual       C:\WINDOWS\system32\drivers\hidusb.sys
+  HpSAMD                                        Stopped    Manual       C:\WINDOWS\system32\drivers\HpSAMD.sys
+  Hsp                                           Stopped    Manual       C:\WINDOWS\system32\drivers\Hsp.sys
+  HTTP                                          Running    Manual       C:\WINDOWS\system32\drivers\HTTP.sys
+  hvcrash                                       Stopped    Disabled     C:\WINDOWS\system32\drivers\hvcrash.sys
+  hvservice                                     Stopped    Manual       C:\WINDOWS\system32\drivers\hvservice.sys
+  HwNClx0101                                    Stopped    Manual       C:\WINDOWS\system32\Drivers\mshwnclx.sys
+  hwpolicy                                      Stopped    Boot         C:\WINDOWS\system32\drivers\hwpolicy.sys
+  hyperkbd                                      Stopped    Manual       C:\WINDOWS\system32\drivers\hyperkbd.sys
+  HyperVideo                                    Stopped    Manual       C:\WINDOWS\system32\drivers\HyperVideo.sys
+  I3CHost                                       Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\i3chost.inf_amd64_72e01dc30c743225\i3chost.sys
+  i8042prt                                      Stopped    Manual       C:\WINDOWS\system32\drivers\i8042prt.sys
+  iagpio                                        Stopped    Manual       C:\WINDOWS\system32\drivers\iagpio.sys
+  iai2c                                         Stopped    Manual       C:\WINDOWS\system32\drivers\iai2c.sys
+  iaLPSS2i_GPIO2                                Stopped    Manual       C:\WINDOWS\system32\drivers\iaLPSS2i_GPIO2.sys
+  iaLPSS2i_GPIO2_BXT_P                          Stopped    Manual       C:\WINDOWS\system32\drivers\iaLPSS2i_GPIO2_BXT_P.sys
+  iaLPSS2i_GPIO2_CNL                            Stopped    Manual       C:\WINDOWS\system32\drivers\iaLPSS2i_GPIO2_CNL.sys
+  iaLPSS2i_GPIO2_GLK                            Stopped    Manual       C:\WINDOWS\system32\drivers\iaLPSS2i_GPIO2_GLK.sys
+  iaLPSS2i_I2C                                  Stopped    Manual       C:\WINDOWS\system32\drivers\iaLPSS2i_I2C.sys
+  iaLPSS2i_I2C_BXT_P                            Stopped    Manual       C:\WINDOWS\system32\drivers\iaLPSS2i_I2C_BXT_P.sys
+  iaLPSS2i_I2C_CNL                              Stopped    Manual       C:\WINDOWS\system32\drivers\iaLPSS2i_I2C_CNL.sys
+  iaLPSS2i_I2C_GLK                              Stopped    Manual       C:\WINDOWS\system32\drivers\iaLPSS2i_I2C_GLK.sys
+  iaLPSSi_GPIO                                  Stopped    Manual       C:\WINDOWS\system32\drivers\iaLPSSi_GPIO.sys
+  iaLPSSi_I2C                                   Stopped    Manual       C:\WINDOWS\system32\drivers\iaLPSSi_I2C.sys
+  iaStorAVC                                     Stopped    Manual       C:\WINDOWS\system32\drivers\iaStorAVC.sys
+  iaStorV                                       Stopped    Manual       C:\WINDOWS\system32\drivers\iaStorV.sys
+  ibbus                                         Stopped    Manual       C:\WINDOWS\system32\drivers\ibbus.sys
+  IndirectKmd                                   Stopped    Manual       C:\WINDOWS\system32\drivers\IndirectKmd.sys
+  IntcAzAudAddService                           Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\hdxacpasus.inf_amd64_143957bed4407a5c\RTKVHD64.sys
+  intelide                                      Stopped    Manual       C:\WINDOWS\system32\drivers\intelide.sys
+  intelpep                                      Running    Boot         C:\WINDOWS\system32\drivers\intelpep.sys
+  intelpmax                                     Stopped    Manual       C:\WINDOWS\system32\drivers\intelpmax.sys
+  IntelPMT                                      Running    Boot         C:\WINDOWS\system32\drivers\IntelPMT.sys
+  intelppm                                      Stopped    Manual       C:\WINDOWS\system32\drivers\intelppm.sys
+  iorate                                        Running    Boot         C:\WINDOWS\system32\drivers\iorate.sys
+  IpFilterDriver                                Stopped    Manual       C:\WINDOWS\system32\DRIVERS\ipfltdrv.sys
+  IPMIDRV                                       Stopped    Manual       C:\WINDOWS\system32\drivers\IPMIDrv.sys
+  IPNAT                                         Stopped    Manual       C:\WINDOWS\system32\drivers\ipnat.sys
+  IPT                                           Stopped    Manual       C:\WINDOWS\system32\drivers\ipt.sys
+  isapnp                                        Stopped    Manual       C:\WINDOWS\system32\drivers\isapnp.sys
+  iScsiPrt                                      Stopped    Manual       C:\WINDOWS\system32\drivers\msiscsi.sys
+  ItSas35i                                      Stopped    Manual       C:\WINDOWS\system32\drivers\ItSas35i.sys
+  kbdclass                                      Running    Manual       C:\WINDOWS\system32\drivers\kbdclass.sys
+  kbdhid                                        Running    Manual       C:\WINDOWS\system32\drivers\kbdhid.sys
+  kdnic                                         Running    Manual       C:\WINDOWS\system32\drivers\kdnic.sys
+  kdnic_legacy                                  Stopped    Manual       C:\WINDOWS\system32\drivers\kdnic_legacy.sys
+  KSecDD                                        Running    Boot         C:\WINDOWS\system32\Drivers\ksecdd.sys
+  KSecPkg                                       Running    Boot         C:\WINDOWS\system32\Drivers\ksecpkg.sys
+  KslD                                          Running    Manual       C:\WINDOWS\system32\drivers\wd\KslD.sys
+  ksthunk                                       Running    Manual       C:\WINDOWS\system32\drivers\ksthunk.sys
+  l1vhlwf                                       Stopped    Auto         C:\WINDOWS\system32\drivers\l1vhlwf.sys
+  LHidFilt                                      Stopped    Manual       C:\WINDOWS\system32\drivers\LHidFilt.Sys
+  lltdio                                        Running    Auto         C:\WINDOWS\system32\drivers\lltdio.sys
+  LMouFilt                                      Stopped    Manual       C:\WINDOWS\system32\drivers\LMouFilt.Sys
+  LSI_SAS                                       Stopped    Manual       C:\WINDOWS\system32\drivers\lsi_sas.sys
+  LSI_SAS2i                                     Stopped    Manual       C:\WINDOWS\system32\drivers\lsi_sas2i.sys
+  LSI_SAS3i                                     Stopped    Manual       C:\WINDOWS\system32\drivers\lsi_sas3i.sys
+  luafv                                         Running    Auto         C:\WINDOWS\system32\drivers\luafv.sys
+  lxss                                          Running    Boot         C:\WINDOWS\system32\drivers\lxss.sys
+  mausbhost                                     Stopped    Manual       C:\WINDOWS\system32\drivers\mausbhost.sys
+  mausbip                                       Stopped    Manual       C:\WINDOWS\system32\drivers\mausbip.sys
+  MbbCx                                         Stopped    Manual       C:\WINDOWS\system32\drivers\MbbCx.sys
+  megasas2i                                     Stopped    Manual       C:\WINDOWS\system32\drivers\MegaSas2i.sys
+  megasas35i                                    Stopped    Manual       C:\WINDOWS\system32\drivers\megasas35i.sys
+  megasr                                        Stopped    Manual       C:\WINDOWS\system32\drivers\megasr.sys
+  Microsoft_Bluetooth_AvrcpTransport            Stopped    Manual       C:\WINDOWS\system32\drivers\Microsoft.Bluetooth.AvrcpTransport.sys
+  mlx4_bus                                      Stopped    Manual       C:\WINDOWS\system32\drivers\mlx4_bus.sys
+  MMCSS                                         Running    Auto         C:\WINDOWS\system32\drivers\mmcss.sys
+  Modem                                         Stopped    Manual       C:\WINDOWS\system32\drivers\modem.sys
+  monitor                                       Running    Manual       C:\WINDOWS\system32\drivers\monitor.sys
+  mouclass                                      Running    Manual       C:\WINDOWS\system32\drivers\mouclass.sys
+  mouhid                                        Running    Manual       C:\WINDOWS\system32\drivers\mouhid.sys
+  mountmgr                                      Running    Boot         C:\WINDOWS\system32\drivers\mountmgr.sys
+  mpi3drvi                                      Stopped    Manual       C:\WINDOWS\system32\drivers\mpi3drvi.sys
+  mpsdrv                                        Running    Manual       C:\WINDOWS\system32\drivers\mpsdrv.sys
+  MRxDAV                                        Stopped    Manual       C:\WINDOWS\system32\drivers\mrxdav.sys
+  mrxsmb                                        Running    Manual       C:\WINDOWS\system32\DRIVERS\mrxsmb.sys
+  mrxsmb20                                      Running    Manual       C:\WINDOWS\system32\DRIVERS\mrxsmb20.sys
+  MsBridge                                      Stopped    Manual       C:\WINDOWS\system32\drivers\bridge.sys
+  Msfs                                          Running    System       C:\WINDOWS\system32\drivers\Msfs.sys
+  msgpiowin32                                   Running    Manual       C:\WINDOWS\system32\drivers\msgpiowin32.sys
+  mshidkmdf                                     Running    Manual       C:\WINDOWS\system32\Drivers\mshidkmdf.sys
+  mshidumdf                                     Stopped    Manual       C:\WINDOWS\system32\drivers\mshidumdf.sys
+  msisadrv                                      Running    Boot         C:\WINDOWS\system32\drivers\msisadrv.sys
+  MSKSSRV                                       Running    Manual       C:\WINDOWS\system32\drivers\MSKSSRV.sys
+  MsLldp                                        Running    Auto         C:\WINDOWS\system32\drivers\mslldp.sys
+  MSPCLOCK                                      Stopped    Manual       C:\WINDOWS\system32\drivers\MSPCLOCK.sys
+  MSPQM                                         Stopped    Manual       C:\WINDOWS\system32\drivers\MSPQM.sys
+  MsQuic                                        Stopped    Manual       C:\WINDOWS\system32\drivers\msquic.sys
+  MsQuicPrev                                    Stopped    Manual       C:\WINDOWS\system32\drivers\msquicprev.sys
+  MsRPC                                         Stopped    Manual       C:\WINDOWS\system32\drivers\MsRPC.sys
+  mssmbios                                      Running    System       C:\WINDOWS\system32\drivers\mssmbios.sys
+  MSTEE                                         Stopped    Manual       C:\WINDOWS\system32\drivers\MSTEE.sys
+  MTConfig                                      Running    Manual       C:\WINDOWS\system32\drivers\MTConfig.sys
+  mtkbtacx                                      Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\mtkbtacx.inf_amd64_83b672d8fe91251d\mtkbtacx.sys
+  MTKBTFilterx64                                Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\mtkbtfilter.inf_amd64_5fc6185c7d4a1cf7\mtkbtfilterx.sys
+  mtkwlex                                       Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\mtkwl6ex.inf_amd64_238ff33f3a3d66ae\mtkwl6ex.sys
+  Mup                                           Running    Boot         C:\WINDOWS\system32\Drivers\mup.sys
+  mvumis                                        Stopped    Manual       C:\WINDOWS\system32\drivers\mvumis.sys
+  NativeWifiP                                   Running    Manual       C:\WINDOWS\system32\DRIVERS\nwifi.sys
+  ndfltr                                        Stopped    Manual       C:\WINDOWS\system32\drivers\ndfltr.sys
+  NDIS                                          Running    Boot         C:\WINDOWS\system32\drivers\ndis.sys
+  NdisCap                                       Running    System       C:\WINDOWS\system32\drivers\ndiscap.sys
+  NdisImPlatform                                Stopped    Manual       C:\WINDOWS\system32\drivers\NdisImPlatform.sys
+  NdisTapi                                      Stopped    Manual       C:\WINDOWS\system32\DRIVERS\ndistapi.sys
+  Ndisuio                                       Running    Manual       C:\WINDOWS\system32\drivers\ndisuio.sys
+  NdisVirtualBus                                Running    Manual       C:\WINDOWS\system32\drivers\NdisVirtualBus.sys
+  NdisWan                                       Stopped    Manual       C:\WINDOWS\system32\drivers\ndiswan.sys
+  ndiswanlegacy                                 Stopped    Manual       C:\WINDOWS\system32\DRIVERS\ndiswan.sys
+  NDKPerf                                       Stopped    Manual       C:\WINDOWS\system32\drivers\NDKPerf.sys
+  NDKPing                                       Stopped    Manual       C:\WINDOWS\system32\drivers\NDKPing.sys
+  ndproxy                                       Stopped    Manual       C:\WINDOWS\system32\DRIVERS\NDProxy.sys
+  Ndu                                           Running    Auto         C:\WINDOWS\system32\drivers\Ndu.sys
+  NetAdapterCx                                  Stopped    Manual       C:\WINDOWS\system32\drivers\netadaptercx.sys
+  NetBIOS                                       Running    System       C:\WINDOWS\system32\drivers\netbios.sys
+  NetBT                                         Running    System       C:\WINDOWS\system32\DRIVERS\netbt.sys
+  netvsc                                        Stopped    Manual       C:\WINDOWS\system32\drivers\netvsc.sys
+  NetworkPrivacyPolicy                          Stopped    Auto         C:\WINDOWS\system32\DriverStore\FileRepository\networkprivacypolicy.inf_amd64_42abed8762795b20\NetworkPrivacyPolicy.sys
+  Npfs                                          Running    System       C:\WINDOWS\system32\drivers\Npfs.sys
+  npsvctrig                                     Running    System       C:\WINDOWS\system32\drivers\npsvctrig.sys
+  nsiproxy                                      Running    System       C:\WINDOWS\system32\drivers\nsiproxy.sys
+  Ntfs                                          Running    Manual       C:\WINDOWS\system32\drivers\Ntfs.sys
+  Null                                          Running    System       C:\WINDOWS\system32\drivers\Null.sys
+  nvdimm                                        Stopped    Manual       C:\WINDOWS\system32\drivers\nvdimm.sys
+  nvlddmkm                                      Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\nvami.inf_amd64_171f1746818db7fd\nvlddmkm.sys
+  nvmedisk                                      Running    Boot         C:\WINDOWS\system32\drivers\nvmedisk.sys
+  NvModuleTracker                               Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\nvmoduletracker.inf_amd64_0c1cc60a4b422185\NvModuleTracker.sys
+  nvpcf                                         Running    Manual       C:\WINDOWS\system32\drivers\nvpcf.sys
+  nvraid                                        Stopped    Manual       C:\WINDOWS\system32\drivers\nvraid.sys
+  nvstor                                        Stopped    Manual       C:\WINDOWS\system32\drivers\nvstor.sys
+  NVSWCFilter                                   Stopped    Manual       C:\WINDOWS\system32\drivers\nvswcfilter.sys
+  nvvad_WaveExtensible                          Running    Manual       C:\WINDOWS\system32\drivers\nvvad64v.sys
+  nvvhci                                        Running    Manual       C:\WINDOWS\system32\drivers\nvvhci.sys
+  P9Rdr                                         Running    Manual       C:\WINDOWS\system32\drivers\p9rdr.sys
+  Parport                                       Stopped    Manual       C:\WINDOWS\system32\drivers\parport.sys
+  partmgr                                       Running    Boot         C:\WINDOWS\system32\drivers\partmgr.sys
+  pci                                           Running    Boot         C:\WINDOWS\system32\drivers\pci.sys
+  pciide                                        Stopped    Manual       C:\WINDOWS\system32\drivers\pciide.sys
+  pcmcia                                        Stopped    Manual       C:\WINDOWS\system32\drivers\pcmcia.sys
+  pcw                                           Running    Boot         C:\WINDOWS\system32\drivers\pcw.sys
+  pdc                                           Running    Boot         C:\WINDOWS\system32\drivers\pdc.sys
+  PEAUTH                                        Running    Auto         C:\WINDOWS\system32\drivers\peauth.sys
+  percsas2i                                     Stopped    Manual       C:\WINDOWS\system32\drivers\percsas2i.sys
+  percsas3i                                     Stopped    Manual       C:\WINDOWS\system32\drivers\percsas3i.sys
+  PktMon                                        Stopped    Manual       C:\WINDOWS\system32\drivers\PktMon.sys
+  PktMonApi                                     Stopped    Manual       C:\WINDOWS\system32\drivers\PktMonApi.sys
+  PlutonHeci                                    Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\pluton-heci.inf_amd64_0959ecb9be3bffdf\pluton-heci.sys
+  PlutonHsp2                                    Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\plutonhsp2.inf_amd64_380e24eba15adc2d\PlutonHsp2.sys
+  pmem                                          Stopped    Manual       C:\WINDOWS\system32\drivers\pmem.sys
+  PNPMEM                                        Stopped    Manual       C:\WINDOWS\system32\drivers\pnpmem.sys
+  portcfg                                       Stopped    Manual       C:\WINDOWS\system32\drivers\portcfg.sys
+  PptpMiniport                                  Stopped    Manual       C:\WINDOWS\system32\drivers\raspptp.sys
+  PRM                                           Running    Boot         C:\WINDOWS\system32\DriverStore\FileRepository\prm.inf_amd64_7c38475757a1f016\PRM.sys
+  Processor                                     Stopped    Manual       C:\WINDOWS\system32\drivers\processr.sys
+  Psched                                        Running    System       C:\WINDOWS\system32\drivers\pacer.sys
+  pvscsi                                        Stopped    Manual       C:\WINDOWS\system32\drivers\pvscsii.sys
+  QWAVEdrv                                      Stopped    Manual       C:\WINDOWS\system32\drivers\qwavedrv.sys
+  Ramdisk                                       Stopped    Manual       C:\WINDOWS\system32\drivers\ramdisk.sys
+  RasAcd                                        Stopped    Manual       C:\WINDOWS\system32\DRIVERS\rasacd.sys
+  RasAgileVpn                                   Stopped    Manual       C:\WINDOWS\system32\drivers\AgileVpn.sys
+  Rasl2tp                                       Stopped    Manual       C:\WINDOWS\system32\drivers\rasl2tp.sys
+  RasPppoe                                      Stopped    Manual       C:\WINDOWS\system32\DRIVERS\raspppoe.sys
+  RasSstp                                       Stopped    Manual       C:\WINDOWS\system32\drivers\rassstp.sys
+  rdbss                                         Running    System       C:\WINDOWS\system32\DRIVERS\rdbss.sys
+  rdpbus                                        Running    Manual       C:\WINDOWS\system32\drivers\rdpbus.sys
+  RDPDR                                         Stopped    Manual       C:\WINDOWS\system32\drivers\rdpdr.sys
+  rdyboost                                      Running    Boot         C:\WINDOWS\system32\drivers\rdyboost.sys
+  ReFS                                          Stopped    Manual       C:\WINDOWS\system32\drivers\ReFS.sys
+  ReFSv1                                        Stopped    Manual       C:\WINDOWS\system32\drivers\ReFSv1.sys
+  RFCOMM                                        Running    Manual       C:\WINDOWS\system32\drivers\rfcomm.sys
+  rhproxy                                       Stopped    Manual       C:\WINDOWS\system32\drivers\rhproxy.sys
+  ROGKB                                         Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\rogkb.inf_amd64_2f2233bdcdf1b092\ROGKB.sys
+  RoutePolicy                                   Stopped    Manual       C:\WINDOWS\system32\drivers\RoutePolicy.sys
+  rspndr                                        Running    Auto         C:\WINDOWS\system32\drivers\rspndr.sys
+  RTSUER                                        Stopped    Manual       C:\WINDOWS\system32\Drivers\RtsUer.sys
+  s3cap                                         Stopped    Manual       C:\WINDOWS\system32\drivers\vms3cap.sys
+  sbp2port                                      Stopped    Manual       C:\WINDOWS\system32\drivers\sbp2port.sys
+  scfilter                                      Stopped    Manual       C:\WINDOWS\system32\DRIVERS\scfilter.sys
+  scmbus                                        Stopped    Manual       C:\WINDOWS\system32\drivers\scmbus.sys
+  sdbus                                         Stopped    Manual       C:\WINDOWS\system32\drivers\sdbus.sys
+  SdcaHidInbox                                  Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\sdcahid.inf_amd64_9b043c5c82568ed0\SdcaHid.sys
+  SdcaMfdInbox                                  Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\sdcamfd.inf_amd64_7616b07de0d13d6f\SdcaMfd.sys
+  sdstor                                        Stopped    Manual       C:\WINDOWS\system32\drivers\sdstor.sys
+  SerCx                                         Stopped    Manual       C:\WINDOWS\system32\drivers\SerCx.sys
+  SerCx2                                        Stopped    Manual       C:\WINDOWS\system32\drivers\SerCx2.sys
+  Serenum                                       Stopped    Manual       C:\WINDOWS\system32\drivers\serenum.sys
+  Serial                                        Stopped    Manual       C:\WINDOWS\system32\drivers\serial.sys
+  sermouse                                      Stopped    Manual       C:\WINDOWS\system32\drivers\sermouse.sys
+  sfloppy                                       Stopped    Manual       C:\WINDOWS\system32\drivers\sfloppy.sys
+  SiSRaid2                                      Stopped    Manual       C:\WINDOWS\system32\drivers\SiSRaid2.sys
+  SiSRaid4                                      Stopped    Manual       C:\WINDOWS\system32\drivers\sisraid4.sys
+  SmartSAMD                                     Stopped    Manual       C:\WINDOWS\system32\drivers\SmartSAMD.sys
+  spaceparser                                   Stopped    Manual       C:\WINDOWS\system32\drivers\spaceparser.sys
+  spaceport                                     Running    Boot         C:\WINDOWS\system32\drivers\spaceport.sys
+  SpbCx                                         Running    Manual       C:\WINDOWS\system32\drivers\SpbCx.sys
+  srv2                                          Running    Manual       C:\WINDOWS\system32\DRIVERS\srv2.sys
+  srvnet                                        Running    Manual       C:\WINDOWS\system32\DRIVERS\srvnet.sys
+  ssbthid                                       Stopped    Manual       C:\WINDOWS\system32\drivers\ssbthid.sys
+  ssdevfactory                                  Stopped    Manual       C:\WINDOWS\system32\drivers\ssdevfactory.sys
+  sshid                                         Stopped    Manual       C:\WINDOWS\system32\drivers\sshid.sys
+  stexstor                                      Stopped    Manual       C:\WINDOWS\system32\drivers\stexstor.sys
+  storahci                                      Stopped    Manual       C:\WINDOWS\system32\drivers\storahci.sys
+  storflt                                       Stopped    Manual       C:\WINDOWS\system32\drivers\vmstorfl.sys
+  stornvme                                      Running    Boot         C:\WINDOWS\system32\drivers\stornvme.sys
+  storqosflt                                    Running    Auto         C:\WINDOWS\system32\drivers\storqosflt.sys
+  storufs                                       Stopped    Manual       C:\WINDOWS\system32\drivers\storufs.sys
+  storvsc                                       Stopped    Manual       C:\WINDOWS\system32\drivers\storvsc.sys
+  swenum                                        Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\swenum.inf_amd64_8b9dd76f362e3ec6\swenum.sys
+  Tcpip                                         Running    Boot         C:\WINDOWS\system32\drivers\tcpip.sys
+  Tcpip6                                        Stopped    Manual       C:\WINDOWS\system32\drivers\tcpip.sys
+  tcpipreg                                      Running    Auto         C:\WINDOWS\system32\drivers\tcpipreg.sys
+  tdx                                           Running    System       C:\WINDOWS\system32\DRIVERS\tdx.sys
+  terminpt                                      Stopped    Manual       C:\WINDOWS\system32\drivers\terminpt.sys
+  ThermalFilter                                 Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\c_thermal.inf_amd64_78ba2b956ec1ccb2\ThermalFilter.sys
+  TPM                                           Running    Manual       C:\WINDOWS\system32\drivers\tpm.sys
+  TsUsbFlt                                      Stopped    Manual       C:\WINDOWS\system32\drivers\tsusbflt.sys
+  TsUsbGD                                       Stopped    Manual       C:\WINDOWS\system32\drivers\TsUsbGD.sys
+  tunnel                                        Stopped    Manual       C:\WINDOWS\system32\drivers\tunnel.sys
+  UASPStor                                      Stopped    Manual       C:\WINDOWS\system32\drivers\uaspstor.sys
+  UcmCx0101                                     Running    Manual       C:\WINDOWS\system32\Drivers\UcmCx.sys
+  UcmCxUcsiNvppc                                Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\nvppc.inf_amd64_fb709ac3e9157861\UcmCxUcsiNvppc.sys
+  UcmTcpciCx0101                                Stopped    Manual       C:\WINDOWS\system32\Drivers\UcmTcpciCx.sys
+  UcmUcsiAcpiClient                             Running    Manual       C:\WINDOWS\system32\drivers\UcmUcsiAcpiClient.sys
+  UcmUcsiCx0101                                 Running    Manual       C:\WINDOWS\system32\Drivers\UcmUcsiCx.sys
+  UCPD                                          Running    System       C:\WINDOWS\system32\drivers\UCPD.sys
+  Ucx01000                                      Running    Manual       C:\WINDOWS\system32\drivers\ucx01000.sys
+  UdeCx                                         Stopped    Manual       C:\WINDOWS\system32\drivers\udecx.sys
+  udfs                                          Stopped    Disabled     C:\WINDOWS\system32\DRIVERS\udfs.sys
+  UEFI                                          Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\uefi.inf_amd64_558106d7e173d4b6\UEFI.sys
+  Ufx01000                                      Stopped    Manual       C:\WINDOWS\system32\drivers\ufx01000.sys
+  UfxChipidea                                   Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\ufxchipidea.inf_amd64_6e8bb2ed82835828\UfxChipidea.sys
+  ufxsynopsys                                   Stopped    Manual       C:\WINDOWS\system32\drivers\ufxsynopsys.sys
+  uiomap                                        Running    System       C:\WINDOWS\system32\DriverStore\FileRepository\uiomap.inf_amd64_f5d5465d1731583d\uiomap.sys
+  umbus                                         Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\umbus.inf_amd64_914dd46b4b013b1b\umbus.sys
+  UmPass                                        Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\umpass.inf_amd64_06e016c9ffecbf73\umpass.sys
+  UnionFS                                       Running    Auto         C:\WINDOWS\system32\drivers\UnionFS.sys
+  UrsChipidea                                   Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\urschipidea.inf_amd64_37fb14618bce547b\urschipidea.sys
+  UrsCx01000                                    Stopped    Manual       C:\WINDOWS\system32\drivers\urscx01000.sys
+  UrsSynopsys                                   Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\urssynopsys.inf_amd64_ef0be23d0f063014\urssynopsys.sys
+  Usb4DeviceRouter                              Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\usb4devicerouter.inf_amd64_2e0752aef833ea5c\Usb4DeviceRouter.sys
+  Usb4HostRouter                                Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\usb4hostrouter.inf_amd64_d24b765c434ae02c\Usb4HostRouter.sys
+  usbaudio                                      Stopped    Manual       C:\WINDOWS\system32\drivers\usbaudio.sys
+  usbaudio2                                     Stopped    Manual       C:\WINDOWS\system32\drivers\usbaudio2.sys
+  usbccgp                                       Running    Manual       C:\WINDOWS\system32\drivers\usbccgp.sys
+  usbcir                                        Stopped    Manual       C:\WINDOWS\system32\drivers\usbcir.sys
+  usbehci                                       Stopped    Manual       C:\WINDOWS\system32\drivers\usbehci.sys
+  usbhub                                        Stopped    Manual       C:\WINDOWS\system32\drivers\usbhub.sys
+  USBHUB3                                       Running    Manual       C:\WINDOWS\system32\drivers\UsbHub3.sys
+  usbohci                                       Stopped    Manual       C:\WINDOWS\system32\drivers\usbohci.sys
+  usb-platformdetection                         Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\usb-platformdetection.inf_amd64_53a1b1565ab06885\usb-platformdetection.sys
+  usbprint                                      Stopped    Manual       C:\WINDOWS\system32\drivers\usbprint.sys
+  usbser                                        Stopped    Manual       C:\WINDOWS\system32\drivers\usbser.sys
+  USBSTOR                                       Stopped    Manual       C:\WINDOWS\system32\drivers\USBSTOR.SYS
+  usbuhci                                       Stopped    Manual       C:\WINDOWS\system32\drivers\usbuhci.sys
+  usbvideo                                      Running    Manual       C:\WINDOWS\system32\Drivers\usbvideo.sys
+  USBXHCI                                       Running    Manual       C:\WINDOWS\system32\drivers\USBXHCI.SYS
+  vdrvroot                                      Running    Boot         C:\WINDOWS\system32\drivers\vdrvroot.sys
+  VerifierExt                                   Stopped    Manual       C:\WINDOWS\system32\drivers\VerifierExt.sys
+  vhdmp                                         Stopped    Manual       C:\WINDOWS\system32\drivers\vhdmp.sys
+  vhf                                           Stopped    Manual       C:\WINDOWS\system32\drivers\vhf.sys
+  Vid                                           Running    System       C:\WINDOWS\system32\drivers\Vid.sys
+  VirtualRender                                 Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\vrd.inf_amd64_4dd0e6d66a75bb7e\vrd.sys
+  vmbus                                         Stopped    Manual       C:\WINDOWS\system32\drivers\vmbus.sys
+  VMBusHID                                      Stopped    Manual       C:\WINDOWS\system32\drivers\VMBusHID.sys
+  vmgid                                         Stopped    Manual       C:\WINDOWS\system32\drivers\vmgid.sys
+  VMSNPXY                                       Running    Boot         C:\WINDOWS\system32\drivers\VmsProxyHNic.sys
+  VMSP                                          Running    Auto         C:\WINDOWS\system32\drivers\vmswitch.sys
+  VmsProxy                                      Running    Boot         C:\WINDOWS\system32\drivers\VmsProxy.sys
+  VMSVSF                                        Stopped    Manual       C:\WINDOWS\system32\drivers\vmswitch.sys
+  VMSVSP                                        Stopped    Manual       C:\WINDOWS\system32\drivers\vmswitch.sys
+  volmgr                                        Running    Boot         C:\WINDOWS\system32\drivers\volmgr.sys
+  volmgrx                                       Running    Boot         C:\WINDOWS\system32\drivers\volmgrx.sys
+  volsnap                                       Running    Boot         C:\WINDOWS\system32\drivers\volsnap.sys
+  volume                                        Running    Boot         C:\WINDOWS\system32\drivers\volume.sys
+  vpci                                          Stopped    Manual       C:\WINDOWS\system32\drivers\vpci.sys
+  vsmraid                                       Stopped    Manual       C:\WINDOWS\system32\drivers\vsmraid.sys
+  VSTXRAID                                      Stopped    Manual       C:\WINDOWS\system32\drivers\vstxraid.sys
+  vwifibus                                      Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\netvwifibus.inf_amd64_ab4e111fe8221178\vwifibus.sys
+  vwififlt                                      Running    System       C:\WINDOWS\system32\drivers\vwififlt.sys
+  vwifimp                                       Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\netvwifimp.inf_amd64_dca919233ea9fbe7\vwifimp.sys
+  WacomPen                                      Stopped    Manual       C:\WINDOWS\system32\drivers\wacompen.sys
+  wanarp                                        Stopped    Manual       C:\WINDOWS\system32\DRIVERS\wanarp.sys
+  wanarpv6                                      Stopped    Manual       C:\WINDOWS\system32\DRIVERS\wanarp.sys
+  wcifs                                         Running    Auto         C:\WINDOWS\system32\drivers\wcifs.sys
+  WdBoot                                        Stopped    Boot         C:\WINDOWS\system32\drivers\wd\WdBoot.sys
+  Wdf01000                                      Running    Boot         C:\WINDOWS\system32\drivers\Wdf01000.sys
+  WdFilter                                      Running    Boot         C:\WINDOWS\system32\drivers\wd\WdFilter.sys
+  wdiwifi                                       Running    Manual       C:\WINDOWS\system32\DRIVERS\wdiwifi.sys
+  WdmCompanionFilter                            Stopped    Manual       C:\WINDOWS\system32\drivers\WdmCompanionFilter.sys
+  WdNisDrv                                      Running    Manual       C:\WINDOWS\system32\drivers\wd\WdNisDrv.sys
+  wdvpnpbus                                     Stopped    Manual       C:\WINDOWS\system32\drivers\wdvpnpbus.sys
+  WFPLWFS                                       Running    Boot         C:\WINDOWS\system32\drivers\wfplwfs.sys
+  Wificx                                        Stopped    Manual       C:\WINDOWS\system32\drivers\WifiCx.sys
+  WIMMount                                      Stopped    Manual       C:\WINDOWS\system32\drivers\wimmount.sys
+  WinAccelCx0101                                Stopped    Manual       C:\WINDOWS\system32\drivers\WinAccelCx.sys
+  WindowsTrustedRT                              Running    Boot         C:\WINDOWS\system32\drivers\WindowsTrustedRT.sys
+  WindowsTrustedRTProxy                         Running    Boot         C:\WINDOWS\system32\drivers\WindowsTrustedRTProxy.sys
+  wini3ctarget                                  Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\wini3ctarget.inf_amd64_9bda3f893989b4a6\wini3ctarget.sys
+  WinMad                                        Stopped    Manual       C:\WINDOWS\system32\drivers\winmad.sys
+  WinNat                                        Stopped    Manual       C:\WINDOWS\system32\drivers\winnat.sys
+  WinSetupMon                                   Running    Boot         C:\WINDOWS\system32\DRIVERS\WinSetupMon.sys
+  WINUSB                                        Running    Manual       C:\WINDOWS\system32\drivers\WinUSB.SYS
+  WinVerbs                                      Stopped    Manual       C:\WINDOWS\system32\drivers\winverbs.sys
+  WmiAcpi                                       Running    Manual       C:\WINDOWS\system32\drivers\wmiacpi.sys
+  Wof                                           Running    Boot         C:\WINDOWS\system32\drivers\Wof.sys
+  WpdUpFltr                                     Stopped    Manual       C:\WINDOWS\system32\drivers\WpdUpFltr.sys
+  ws2ifsl                                       Stopped    Disabled     C:\WINDOWS\system32\drivers\ws2ifsl.sys
+  wtd                                           Running    Auto         C:\WINDOWS\system32\drivers\wtd.sys
+  WudfPf                                        Stopped    Manual       C:\WINDOWS\system32\drivers\WudfPf.sys
+  WUDFRd                                        Running    Manual       C:\WINDOWS\system32\drivers\WUDFRd.sys
+  xboxgip                                       Stopped    Manual       C:\WINDOWS\system32\drivers\xboxgip.sys
+  xinputhid                                     Stopped    Manual       C:\WINDOWS\system32\drivers\xinputhid.sys
+  Xvdd                                          Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\xvdd.inf_amd64_a332708e26a8cf3c\xvdd.sys
+
+--- Running kernel drivers only ---
+  ACPI                                          C:\WINDOWS\system32\drivers\ACPI.sys
+  acpiex                                        C:\WINDOWS\system32\Drivers\acpiex.sys
+  acpitime                                      C:\WINDOWS\system32\drivers\acpitime.sys
+  Acx01000                                      C:\WINDOWS\system32\drivers\Acx01000.sys
+  AFD                                           C:\WINDOWS\system32\drivers\afd.sys
+  afunix                                        C:\WINDOWS\system32\drivers\afunix.sys
+  ahcache                                       C:\WINDOWS\system32\DRIVERS\ahcache.sys
+  amdacpbus                                     C:\WINDOWS\system32\DriverStore\FileRepository\amdacpbus.inf_amd64_1ef8c0c88c1e246e\amdacpbus.sys
+  amdfendr                                      C:\WINDOWS\system32\DriverStore\FileRepository\amdfendr.inf_amd64_bea53a1d416fbcfa\amdfendr.sys
+  amdfendrmgr                                   C:\WINDOWS\system32\DriverStore\FileRepository\amdfendr.inf_amd64_bea53a1d416fbcfa\amdfendrmgr.sys
+  amdgpio2                                      C:\WINDOWS\system32\DriverStore\FileRepository\amdgpio2.inf_amd64_e3ba65168b9dbb29\amdgpio2.sys
+  amdi2c                                        C:\WINDOWS\system32\drivers\amdi2c.sys
+  AmdMicroPEP                                   C:\WINDOWS\system32\DriverStore\FileRepository\amdmicropep.inf_amd64_0ee9b60764bf0bba\AmdMicroPEP.sys
+  amdpmf                                        C:\WINDOWS\system32\drivers\amdpmf.sys
+  AmdPpkg                                       C:\WINDOWS\system32\DriverStore\FileRepository\amdppkg.inf_amd64_f57cfc457aa3e60b\AmdPpkg.sys
+  AmdPPM                                        C:\WINDOWS\system32\drivers\amdppm.sys
+  amdpsp                                        C:\WINDOWS\system32\drivers\amdpsp.sys
+  AMDSAFD                                       C:\WINDOWS\system32\DriverStore\FileRepository\amdsafd.inf_amd64_d4de13a10f2586d0\amdsafd.sys
+  amdsfhkmdf                                    C:\WINDOWS\system32\drivers\amdsfhkmdf.sys
+  amduw23g-198974-eda2a421                      C:\WINDOWS\system32\DriverStore\FileRepository\u0198974.inf_amd64_dcac9659486b668a\B025819\amdkmdag.sys
+  amdwps                                        C:\WINDOWS\system32\drivers\amdwps.sys
+  AsusPTPDrv                                    C:\WINDOWS\system32\DriverStore\FileRepository\asusptpfilter.inf_amd64_ebab82ab1cf6be11\AsusPTPFilter.sys
+  AsusSAIO                                      C:\WINDOWS\system32\DriverStore\FileRepository\asussci2.inf_amd64_d5b92bc7afd7593a\ASUSSystemAnalysis\AsusSAIO.sys
+  AtiHDAudioService                             C:\WINDOWS\system32\DriverStore\FileRepository\atihdwt6.inf_amd64_76dcade1eff04982\AtihdWT6.sys
+  ATKWMIACPIIO                                  C:\WINDOWS\system32\DriverStore\FileRepository\asussci2.inf_amd64_d5b92bc7afd7593a\ASUSOptimization\AsusWmiAcpi.sys
+  bam                                           C:\WINDOWS\system32\drivers\bam.sys
+  BasicDisplay                                  C:\WINDOWS\system32\DriverStore\FileRepository\basicdisplay.inf_amd64_2753efdbb0d9a226\BasicDisplay.sys
+  BasicRender                                   C:\WINDOWS\system32\DriverStore\FileRepository\basicrender.inf_amd64_17141d297b334aa5\BasicRender.sys
+  Beep                                          C:\WINDOWS\system32\drivers\Beep.sys
+  bfs                                           C:\WINDOWS\system32\drivers\bfs.sys
+  bindflt                                       C:\WINDOWS\system32\drivers\bindflt.sys
+  bowser                                        C:\WINDOWS\system32\DRIVERS\bowser.sys
+  BthEnum                                       C:\WINDOWS\system32\drivers\BthEnum.sys
+  BthLEEnum                                     C:\WINDOWS\system32\drivers\Microsoft.Bluetooth.Legacy.LEEnumerator.sys
+  BthPan                                        C:\WINDOWS\system32\drivers\bthpan.sys
+  BTHPORT                                       C:\WINDOWS\system32\drivers\BTHport.sys
+  BTHUSB                                        C:\WINDOWS\system32\drivers\BTHUSB.sys
+  CAD                                           C:\WINDOWS\system32\drivers\CAD.sys
+  CDD                                           C:\WINDOWS\system32\cdd.dll
+  cdrom                                         C:\WINDOWS\system32\drivers\cdrom.sys
+  CimFS                                         C:\WINDOWS\system32\drivers\CimFS.sys
+  CldFlt                                        C:\WINDOWS\system32\drivers\cldflt.sys
+  CLFS                                          C:\WINDOWS\system32\drivers\CLFS.sys
+  CmBatt                                        C:\WINDOWS\system32\drivers\CmBatt.sys
+  CNG                                           C:\WINDOWS\system32\Drivers\cng.sys
+  CompositeBus                                  C:\WINDOWS\system32\DriverStore\FileRepository\compositebus.inf_amd64_8cf6fa9d3afdfa25\CompositeBus.sys
+  condrv                                        C:\WINDOWS\system32\drivers\condrv.sys
+  dam                                           C:\WINDOWS\system32\drivers\dam.sys
+  Dfsc                                          C:\WINDOWS\system32\Drivers\dfsc.sys
+  disk                                          C:\WINDOWS\system32\drivers\disk.sys
+  DXGKrnl                                       C:\WINDOWS\system32\drivers\dxgkrnl.sys
+  EhStorClass                                   C:\WINDOWS\system32\drivers\EhStorClass.sys
+  fastfat                                       C:\WINDOWS\system32\drivers\fastfat.sys
+  FileCrypt                                     C:\WINDOWS\system32\drivers\filecrypt.sys
+  FileInfo                                      C:\WINDOWS\system32\drivers\fileinfo.sys
+  FltMgr                                        C:\WINDOWS\system32\drivers\fltmgr.sys
+  fvevol                                        C:\WINDOWS\system32\DRIVERS\fvevol.sys
+  GPIOClx0101                                   C:\WINDOWS\system32\Drivers\msgpioclx.sys
+  HDAudBus                                      C:\WINDOWS\system32\drivers\HDAudBus.sys
+  hidi2c                                        C:\WINDOWS\system32\drivers\hidi2c.sys
+  HidUsb                                        C:\WINDOWS\system32\drivers\hidusb.sys
+  HTTP                                          C:\WINDOWS\system32\drivers\HTTP.sys
+  IntcAzAudAddService                           C:\WINDOWS\system32\DriverStore\FileRepository\hdxacpasus.inf_amd64_143957bed4407a5c\RTKVHD64.sys
+  intelpep                                      C:\WINDOWS\system32\drivers\intelpep.sys
+  IntelPMT                                      C:\WINDOWS\system32\drivers\IntelPMT.sys
+  iorate                                        C:\WINDOWS\system32\drivers\iorate.sys
+  kbdclass                                      C:\WINDOWS\system32\drivers\kbdclass.sys
+  kbdhid                                        C:\WINDOWS\system32\drivers\kbdhid.sys
+  kdnic                                         C:\WINDOWS\system32\drivers\kdnic.sys
+  KSecDD                                        C:\WINDOWS\system32\Drivers\ksecdd.sys
+  KSecPkg                                       C:\WINDOWS\system32\Drivers\ksecpkg.sys
+  KslD                                          C:\WINDOWS\system32\drivers\wd\KslD.sys
+  ksthunk                                       C:\WINDOWS\system32\drivers\ksthunk.sys
+  lltdio                                        C:\WINDOWS\system32\drivers\lltdio.sys
+  luafv                                         C:\WINDOWS\system32\drivers\luafv.sys
+  lxss                                          C:\WINDOWS\system32\drivers\lxss.sys
+  MMCSS                                         C:\WINDOWS\system32\drivers\mmcss.sys
+  monitor                                       C:\WINDOWS\system32\drivers\monitor.sys
+  mouclass                                      C:\WINDOWS\system32\drivers\mouclass.sys
+  mouhid                                        C:\WINDOWS\system32\drivers\mouhid.sys
+  mountmgr                                      C:\WINDOWS\system32\drivers\mountmgr.sys
+  mpsdrv                                        C:\WINDOWS\system32\drivers\mpsdrv.sys
+  mrxsmb                                        C:\WINDOWS\system32\DRIVERS\mrxsmb.sys
+  mrxsmb20                                      C:\WINDOWS\system32\DRIVERS\mrxsmb20.sys
+  Msfs                                          C:\WINDOWS\system32\drivers\Msfs.sys
+  msgpiowin32                                   C:\WINDOWS\system32\drivers\msgpiowin32.sys
+  mshidkmdf                                     C:\WINDOWS\system32\Drivers\mshidkmdf.sys
+  msisadrv                                      C:\WINDOWS\system32\drivers\msisadrv.sys
+  MSKSSRV                                       C:\WINDOWS\system32\drivers\MSKSSRV.sys
+  MsLldp                                        C:\WINDOWS\system32\drivers\mslldp.sys
+  mssmbios                                      C:\WINDOWS\system32\drivers\mssmbios.sys
+  MTConfig                                      C:\WINDOWS\system32\drivers\MTConfig.sys
+  mtkbtacx                                      C:\WINDOWS\system32\DriverStore\FileRepository\mtkbtacx.inf_amd64_83b672d8fe91251d\mtkbtacx.sys
+  MTKBTFilterx64                                C:\WINDOWS\system32\DriverStore\FileRepository\mtkbtfilter.inf_amd64_5fc6185c7d4a1cf7\mtkbtfilterx.sys
+  mtkwlex                                       C:\WINDOWS\system32\DriverStore\FileRepository\mtkwl6ex.inf_amd64_238ff33f3a3d66ae\mtkwl6ex.sys
+  Mup                                           C:\WINDOWS\system32\Drivers\mup.sys
+  NativeWifiP                                   C:\WINDOWS\system32\DRIVERS\nwifi.sys
+  NDIS                                          C:\WINDOWS\system32\drivers\ndis.sys
+  NdisCap                                       C:\WINDOWS\system32\drivers\ndiscap.sys
+  Ndisuio                                       C:\WINDOWS\system32\drivers\ndisuio.sys
+  NdisVirtualBus                                C:\WINDOWS\system32\drivers\NdisVirtualBus.sys
+  Ndu                                           C:\WINDOWS\system32\drivers\Ndu.sys
+  NetBIOS                                       C:\WINDOWS\system32\drivers\netbios.sys
+  NetBT                                         C:\WINDOWS\system32\DRIVERS\netbt.sys
+  Npfs                                          C:\WINDOWS\system32\drivers\Npfs.sys
+  npsvctrig                                     C:\WINDOWS\system32\drivers\npsvctrig.sys
+  nsiproxy                                      C:\WINDOWS\system32\drivers\nsiproxy.sys
+  Ntfs                                          C:\WINDOWS\system32\drivers\Ntfs.sys
+  Null                                          C:\WINDOWS\system32\drivers\Null.sys
+  nvlddmkm                                      C:\WINDOWS\system32\DriverStore\FileRepository\nvami.inf_amd64_171f1746818db7fd\nvlddmkm.sys
+  nvmedisk                                      C:\WINDOWS\system32\drivers\nvmedisk.sys
+  NvModuleTracker                               C:\WINDOWS\system32\DriverStore\FileRepository\nvmoduletracker.inf_amd64_0c1cc60a4b422185\NvModuleTracker.sys
+  nvpcf                                         C:\WINDOWS\system32\drivers\nvpcf.sys
+  nvvad_WaveExtensible                          C:\WINDOWS\system32\drivers\nvvad64v.sys
+  nvvhci                                        C:\WINDOWS\system32\drivers\nvvhci.sys
+  P9Rdr                                         C:\WINDOWS\system32\drivers\p9rdr.sys
+  partmgr                                       C:\WINDOWS\system32\drivers\partmgr.sys
+  pci                                           C:\WINDOWS\system32\drivers\pci.sys
+  pcw                                           C:\WINDOWS\system32\drivers\pcw.sys
+  pdc                                           C:\WINDOWS\system32\drivers\pdc.sys
+  PEAUTH                                        C:\WINDOWS\system32\drivers\peauth.sys
+  PRM                                           C:\WINDOWS\system32\DriverStore\FileRepository\prm.inf_amd64_7c38475757a1f016\PRM.sys
+  Psched                                        C:\WINDOWS\system32\drivers\pacer.sys
+  rdbss                                         C:\WINDOWS\system32\DRIVERS\rdbss.sys
+  rdpbus                                        C:\WINDOWS\system32\drivers\rdpbus.sys
+  rdyboost                                      C:\WINDOWS\system32\drivers\rdyboost.sys
+  RFCOMM                                        C:\WINDOWS\system32\drivers\rfcomm.sys
+  rspndr                                        C:\WINDOWS\system32\drivers\rspndr.sys
+  spaceport                                     C:\WINDOWS\system32\drivers\spaceport.sys
+  SpbCx                                         C:\WINDOWS\system32\drivers\SpbCx.sys
+  srv2                                          C:\WINDOWS\system32\DRIVERS\srv2.sys
+  srvnet                                        C:\WINDOWS\system32\DRIVERS\srvnet.sys
+  stornvme                                      C:\WINDOWS\system32\drivers\stornvme.sys
+  storqosflt                                    C:\WINDOWS\system32\drivers\storqosflt.sys
+  swenum                                        C:\WINDOWS\system32\DriverStore\FileRepository\swenum.inf_amd64_8b9dd76f362e3ec6\swenum.sys
+  Tcpip                                         C:\WINDOWS\system32\drivers\tcpip.sys
+  tcpipreg                                      C:\WINDOWS\system32\drivers\tcpipreg.sys
+  tdx                                           C:\WINDOWS\system32\DRIVERS\tdx.sys
+  TPM                                           C:\WINDOWS\system32\drivers\tpm.sys
+  UcmCx0101                                     C:\WINDOWS\system32\Drivers\UcmCx.sys
+  UcmUcsiAcpiClient                             C:\WINDOWS\system32\drivers\UcmUcsiAcpiClient.sys
+  UcmUcsiCx0101                                 C:\WINDOWS\system32\Drivers\UcmUcsiCx.sys
+  UCPD                                          C:\WINDOWS\system32\drivers\UCPD.sys
+  Ucx01000                                      C:\WINDOWS\system32\drivers\ucx01000.sys
+  UEFI                                          C:\WINDOWS\system32\DriverStore\FileRepository\uefi.inf_amd64_558106d7e173d4b6\UEFI.sys
+  uiomap                                        C:\WINDOWS\system32\DriverStore\FileRepository\uiomap.inf_amd64_f5d5465d1731583d\uiomap.sys
+  umbus                                         C:\WINDOWS\system32\DriverStore\FileRepository\umbus.inf_amd64_914dd46b4b013b1b\umbus.sys
+  UnionFS                                       C:\WINDOWS\system32\drivers\UnionFS.sys
+  usbccgp                                       C:\WINDOWS\system32\drivers\usbccgp.sys
+  USBHUB3                                       C:\WINDOWS\system32\drivers\UsbHub3.sys
+  usbvideo                                      C:\WINDOWS\system32\Drivers\usbvideo.sys
+  USBXHCI                                       C:\WINDOWS\system32\drivers\USBXHCI.SYS
+  vdrvroot                                      C:\WINDOWS\system32\drivers\vdrvroot.sys
+  Vid                                           C:\WINDOWS\system32\drivers\Vid.sys
+  VMSNPXY                                       C:\WINDOWS\system32\drivers\VmsProxyHNic.sys
+  VMSP                                          C:\WINDOWS\system32\drivers\vmswitch.sys
+  VmsProxy                                      C:\WINDOWS\system32\drivers\VmsProxy.sys
+  volmgr                                        C:\WINDOWS\system32\drivers\volmgr.sys
+  volmgrx                                       C:\WINDOWS\system32\drivers\volmgrx.sys
+  volsnap                                       C:\WINDOWS\system32\drivers\volsnap.sys
+  volume                                        C:\WINDOWS\system32\drivers\volume.sys
+  vwifibus                                      C:\WINDOWS\system32\DriverStore\FileRepository\netvwifibus.inf_amd64_ab4e111fe8221178\vwifibus.sys
+  vwififlt                                      C:\WINDOWS\system32\drivers\vwififlt.sys
+  vwifimp                                       C:\WINDOWS\system32\DriverStore\FileRepository\netvwifimp.inf_amd64_dca919233ea9fbe7\vwifimp.sys
+  wcifs                                         C:\WINDOWS\system32\drivers\wcifs.sys
+  Wdf01000                                      C:\WINDOWS\system32\drivers\Wdf01000.sys
+  WdFilter                                      C:\WINDOWS\system32\drivers\wd\WdFilter.sys
+  wdiwifi                                       C:\WINDOWS\system32\DRIVERS\wdiwifi.sys
+  WdNisDrv                                      C:\WINDOWS\system32\drivers\wd\WdNisDrv.sys
+  WFPLWFS                                       C:\WINDOWS\system32\drivers\wfplwfs.sys
+  WindowsTrustedRT                              C:\WINDOWS\system32\drivers\WindowsTrustedRT.sys
+  WindowsTrustedRTProxy                         C:\WINDOWS\system32\drivers\WindowsTrustedRTProxy.sys
+  WinSetupMon                                   C:\WINDOWS\system32\DRIVERS\WinSetupMon.sys
+  WINUSB                                        C:\WINDOWS\system32\drivers\WinUSB.SYS
+  WmiAcpi                                       C:\WINDOWS\system32\drivers\wmiacpi.sys
+  Wof                                           C:\WINDOWS\system32\drivers\Wof.sys
+  wtd                                           C:\WINDOWS\system32\drivers\wtd.sys
+  WUDFRd                                        C:\WINDOWS\system32\drivers\WUDFRd.sys
+
+--- Kernel drivers with non-standard paths (NOT in \System32\drivers\) ---
+  [NON-STANDARD] AcpiAudioCompositorInbox                 Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\acpiaudiocompositor.inf_amd64_047f553a6f70b169\AcpiAudioCompositor.sys
+  [NON-STANDARD] acpipagr                                 Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\acpipagr.inf_amd64_d1093347a27ff89c\acpipagr.sys
+  [NON-STANDARD] AcpiPmi                                  Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\acpipmi.inf_amd64_3ced06eb61dcc792\acpipmi.sys
+  [NON-STANDARD] amdacpbus                                Running    C:\WINDOWS\system32\DriverStore\FileRepository\amdacpbus.inf_amd64_1ef8c0c88c1e246e\amdacpbus.sys
+  [NON-STANDARD] amdfendr                                 Running    C:\WINDOWS\system32\DriverStore\FileRepository\amdfendr.inf_amd64_bea53a1d416fbcfa\amdfendr.sys
+  [NON-STANDARD] amdfendrmgr                              Running    C:\WINDOWS\system32\DriverStore\FileRepository\amdfendr.inf_amd64_bea53a1d416fbcfa\amdfendrmgr.sys
+  [NON-STANDARD] amdgpio2                                 Running    C:\WINDOWS\system32\DriverStore\FileRepository\amdgpio2.inf_amd64_e3ba65168b9dbb29\amdgpio2.sys
+  [NON-STANDARD] AmdMicroPEP                              Running    C:\WINDOWS\system32\DriverStore\FileRepository\amdmicropep.inf_amd64_0ee9b60764bf0bba\AmdMicroPEP.sys
+  [NON-STANDARD] AmdPpkg                                  Running    C:\WINDOWS\system32\DriverStore\FileRepository\amdppkg.inf_amd64_f57cfc457aa3e60b\AmdPpkg.sys
+  [NON-STANDARD] AMDSAFD                                  Running    C:\WINDOWS\system32\DriverStore\FileRepository\amdsafd.inf_amd64_d4de13a10f2586d0\amdsafd.sys
+  [NON-STANDARD] amdsdwc                                  Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\amdsdwc.inf_amd64_8ff5662e24d13f62\amdsdwc.sys
+  [NON-STANDARD] amduw23g-198974-eda2a421                 Running    C:\WINDOWS\system32\DriverStore\FileRepository\u0198974.inf_amd64_dcac9659486b668a\B025819\amdkmdag.sys
+  [NON-STANDARD] AsusPTPDrv                               Running    C:\WINDOWS\system32\DriverStore\FileRepository\asusptpfilter.inf_amd64_ebab82ab1cf6be11\AsusPTPFilter.sys
+  [NON-STANDARD] AsusSAIO                                 Running    C:\WINDOWS\system32\DriverStore\FileRepository\asussci2.inf_amd64_d5b92bc7afd7593a\ASUSSystemAnalysis\AsusSAIO.sys
+  [NON-STANDARD] AtiHDAudioService                        Running    C:\WINDOWS\system32\DriverStore\FileRepository\atihdwt6.inf_amd64_76dcade1eff04982\AtihdWT6.sys
+  [NON-STANDARD] ATKWMIACPIIO                             Running    C:\WINDOWS\system32\DriverStore\FileRepository\asussci2.inf_amd64_d5b92bc7afd7593a\ASUSOptimization\AsusWmiAcpi.sys
+  [NON-STANDARD] BasicDisplay                             Running    C:\WINDOWS\system32\DriverStore\FileRepository\basicdisplay.inf_amd64_2753efdbb0d9a226\BasicDisplay.sys
+  [NON-STANDARD] BasicRender                              Running    C:\WINDOWS\system32\DriverStore\FileRepository\basicrender.inf_amd64_17141d297b334aa5\BasicRender.sys
+  [NON-STANDARD] CDD                                      Running    C:\WINDOWS\system32\cdd.dll
+  [NON-STANDARD] CompositeBus                             Running    C:\WINDOWS\system32\DriverStore\FileRepository\compositebus.inf_amd64_8cf6fa9d3afdfa25\CompositeBus.sys
+  [NON-STANDARD] devmap                                   Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\devmap.inf_amd64_1993197f4612e967\devmap.sys
+  [NON-STANDARD] DisplayMux                               Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\displaymux.inf_amd64_da65a70f0c3ce0f3\DisplayMux.sys
+  [NON-STANDARD] gameflt                                  Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\gameflt.inf_amd64_152b7ad8bf20bdc5\gameflt.sys
+  [NON-STANDARD] genericusbfn                             Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\genericusbfn.inf_amd64_71c810ddc0116541\genericusbfn.sys
+  [NON-STANDARD] GenPass                                  Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\genpass.inf_amd64_0c82d80c9252c9bd\genpass.sys
+  [NON-STANDARD] I3CHost                                  Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\i3chost.inf_amd64_72e01dc30c743225\i3chost.sys
+  [NON-STANDARD] IntcAzAudAddService                      Running    C:\WINDOWS\system32\DriverStore\FileRepository\hdxacpasus.inf_amd64_143957bed4407a5c\RTKVHD64.sys
+  [NON-STANDARD] mtkbtacx                                 Running    C:\WINDOWS\system32\DriverStore\FileRepository\mtkbtacx.inf_amd64_83b672d8fe91251d\mtkbtacx.sys
+  [NON-STANDARD] MTKBTFilterx64                           Running    C:\WINDOWS\system32\DriverStore\FileRepository\mtkbtfilter.inf_amd64_5fc6185c7d4a1cf7\mtkbtfilterx.sys
+  [NON-STANDARD] mtkwlex                                  Running    C:\WINDOWS\system32\DriverStore\FileRepository\mtkwl6ex.inf_amd64_238ff33f3a3d66ae\mtkwl6ex.sys
+  [NON-STANDARD] NetworkPrivacyPolicy                     Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\networkprivacypolicy.inf_amd64_42abed8762795b20\NetworkPrivacyPolicy.sys
+  [NON-STANDARD] nvlddmkm                                 Running    C:\WINDOWS\system32\DriverStore\FileRepository\nvami.inf_amd64_171f1746818db7fd\nvlddmkm.sys
+  [NON-STANDARD] NvModuleTracker                          Running    C:\WINDOWS\system32\DriverStore\FileRepository\nvmoduletracker.inf_amd64_0c1cc60a4b422185\NvModuleTracker.sys
+  [NON-STANDARD] PlutonHeci                               Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\pluton-heci.inf_amd64_0959ecb9be3bffdf\pluton-heci.sys
+  [NON-STANDARD] PlutonHsp2                               Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\plutonhsp2.inf_amd64_380e24eba15adc2d\PlutonHsp2.sys
+  [NON-STANDARD] PRM                                      Running    C:\WINDOWS\system32\DriverStore\FileRepository\prm.inf_amd64_7c38475757a1f016\PRM.sys
+  [NON-STANDARD] ROGKB                                    Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\rogkb.inf_amd64_2f2233bdcdf1b092\ROGKB.sys
+  [NON-STANDARD] SdcaHidInbox                             Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\sdcahid.inf_amd64_9b043c5c82568ed0\SdcaHid.sys
+  [NON-STANDARD] SdcaMfdInbox                             Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\sdcamfd.inf_amd64_7616b07de0d13d6f\SdcaMfd.sys
+  [NON-STANDARD] swenum                                   Running    C:\WINDOWS\system32\DriverStore\FileRepository\swenum.inf_amd64_8b9dd76f362e3ec6\swenum.sys
+  [NON-STANDARD] ThermalFilter                            Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\c_thermal.inf_amd64_78ba2b956ec1ccb2\ThermalFilter.sys
+  [NON-STANDARD] UcmCxUcsiNvppc                           Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\nvppc.inf_amd64_fb709ac3e9157861\UcmCxUcsiNvppc.sys
+  [NON-STANDARD] UEFI                                     Running    C:\WINDOWS\system32\DriverStore\FileRepository\uefi.inf_amd64_558106d7e173d4b6\UEFI.sys
+  [NON-STANDARD] UfxChipidea                              Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\ufxchipidea.inf_amd64_6e8bb2ed82835828\UfxChipidea.sys
+  [NON-STANDARD] uiomap                                   Running    C:\WINDOWS\system32\DriverStore\FileRepository\uiomap.inf_amd64_f5d5465d1731583d\uiomap.sys
+  [NON-STANDARD] umbus                                    Running    C:\WINDOWS\system32\DriverStore\FileRepository\umbus.inf_amd64_914dd46b4b013b1b\umbus.sys
+  [NON-STANDARD] UmPass                                   Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\umpass.inf_amd64_06e016c9ffecbf73\umpass.sys
+  [NON-STANDARD] UrsChipidea                              Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\urschipidea.inf_amd64_37fb14618bce547b\urschipidea.sys
+  [NON-STANDARD] UrsSynopsys                              Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\urssynopsys.inf_amd64_ef0be23d0f063014\urssynopsys.sys
+  [NON-STANDARD] Usb4DeviceRouter                         Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\usb4devicerouter.inf_amd64_2e0752aef833ea5c\Usb4DeviceRouter.sys
+  [NON-STANDARD] Usb4HostRouter                           Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\usb4hostrouter.inf_amd64_d24b765c434ae02c\Usb4HostRouter.sys
+  [NON-STANDARD] usb-platformdetection                    Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\usb-platformdetection.inf_amd64_53a1b1565ab06885\usb-platformdetection.sys
+  [NON-STANDARD] VirtualRender                            Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\vrd.inf_amd64_4dd0e6d66a75bb7e\vrd.sys
+  [NON-STANDARD] vwifibus                                 Running    C:\WINDOWS\system32\DriverStore\FileRepository\netvwifibus.inf_amd64_ab4e111fe8221178\vwifibus.sys
+  [NON-STANDARD] vwifimp                                  Running    C:\WINDOWS\system32\DriverStore\FileRepository\netvwifimp.inf_amd64_dca919233ea9fbe7\vwifimp.sys
+  [NON-STANDARD] wini3ctarget                             Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\wini3ctarget.inf_amd64_9bda3f893989b4a6\wini3ctarget.sys
+  [NON-STANDARD] Xvdd                                     Stopped    C:\WINDOWS\system32\DriverStore\FileRepository\xvdd.inf_amd64_a332708e26a8cf3c\xvdd.sys
+
+--- .sys files modified in last 14 days (system32\drivers + system32) ---
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\storahci.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbd.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\portcls.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbuhci.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\intelide.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\BTHUSB.SYS
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\amdppm.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbehci.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\pciidex.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Kerb3961Kernel.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\nsiproxy.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\dxgmms2.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WUDFPf.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\wfplwfs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rasacd.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\bthport.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\KslD.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbhub.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\amdk8.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hidparse.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\kbdhid.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\pciide.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\serenum.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mouhid.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\scfilter.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vmswitch.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\tcpipreg.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ksecpkg.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\win32kfull.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mstee.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WUDFRd.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\wanarp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\dxgmms1.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WdDevFlt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\dumpsd.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\KNetPwrDepBroker.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbport.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\spacedump.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\intelppm.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hidclass.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\kbdclass.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\BthMini.SYS
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ataport.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mausbip.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\serial.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\isapnp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\sfloppy.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\drmkaud.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mouclass.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\BthHfEnum.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\devauthe.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\CEA.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\dumpfve.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\VmsProxyHNic.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\msquicprev.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\FWPKCLNT.SYS
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WdfLdr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mskssrv.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mspqm.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\qwavedrv.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\wimmount.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ndproxy.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rspndr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\applockerfltr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\tbs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\UsbPmApi.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\win32k.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\UcmCx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WdiWiFi.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WdBoot.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\kmpdc.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\netvsc.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vpci.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vmbus.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Vid.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hvcrash.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\storvsc.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\dmvsc.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vmgid.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vmstorfl.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hyperkbd.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vmgencounter.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\PktMonApi.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\HyperVideo.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vms3cap.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\VMBusHID.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hvservice.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\RoutePolicy.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rdpbus.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\terminpt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\npsvctrig.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\kdnic.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\sdbus.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\USBHUB3.SYS
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\sdstor.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ufxsynopsys.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\msgpiowin32.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WindowsTrustedRTProxy.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\tpm.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\USBSTOR.SYS
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\i8042prt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbohci.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\UcmUcsiAcpiClient.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\winusb.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbccgp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hidi2c.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hidusb.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hidspi.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rfcomm.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vhdmp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\buttonconverter.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\bthenum.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hidinterrupt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Microsoft.Bluetooth.Legacy.LEEnumerator.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hidbth.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\bthpan.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\spaceport.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\acpi.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\pci.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\processr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Hsp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\volmgr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\nvmedisk.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\msiscsi.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\intelpep.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\disk.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\stornvme.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\sbp2port.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\volume.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mausbhost.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\AcpiDev.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\cdrom.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\storufs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\1394ohci.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\scmbus.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\MTConfig.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\uaspstor.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\wacompen.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\nvdimm.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\pmem.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\bttflt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\wmiacpi.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\IPMIDrv.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\atapi.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vhf.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\battc.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\CmBatt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\IntelPMT.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\parport.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\msisadrv.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\fdc.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\flpydisk.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\errdev.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hidbatt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\acpitime.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ramdisk.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\USBAUDIO.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\drmk.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbcir.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\HdAudio.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hdaudbus.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbvideo.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\bthmodem.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\monitor.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hidir.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\EhStorTcgDrv.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbprint.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\circlass.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\sermouse.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\pcmcia.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\kdnic_legacy.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\CAD.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rhproxy.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\pnpmem.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\intelpmax.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\BthA2dp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\amdwps.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\xboxgip.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\BtaMPM.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\USBXHCI.SYS
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Microsoft.Bluetooth.AvrcpTransport.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\xinputhid.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vdrvroot.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbser.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\TsUsbGD.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rootmdm.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usbaudio2.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\fvevol.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rmcast.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WpdUpFltr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mrxdav.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\modem.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\udfs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rdyboost.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\volmgrx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\cdfs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\winhv.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hvsocket.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vmbkmcl.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\bridge.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\PktMon.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\tdx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Ndu.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\NDKPing.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\NDKPerf.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\lxcore.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\VmsProxy.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\l1vhlwf.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ndiscap.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vmbkmclr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\spaceparser.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\p9rdr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\wtd.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\winhvr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\EhStorClass.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\msquic.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rdpdr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ndisuio.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\tcpip.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ndis.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\afd.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\netio.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\tdi.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ntfs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\msrpc.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ksecdd.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\http.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ExecutionContext.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Wdf01000.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\netadaptercx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\wmilib.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\VerifierExt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\partmgr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\werkernel.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\fltMgr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mountmgr.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WinAccelCx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\cng.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Classpnp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\pcw.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\volsnap.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ks.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ksthunk.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mspclock.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\videoprt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\USBCAMD2.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ws2ifsl.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\RNDISMP.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\usb8023.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\bam.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\dam.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rassstp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\raspptp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mslldp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rasl2tp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\afunix.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\netbt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ndiswan.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\agilevpn.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ndistapi.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\wof.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\cldflt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\raspppoe.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\asyncmac.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\NdisVirtualBus.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\NdisImPlatform.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ipfltdrv.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\refs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\tunnel.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WppRecorder.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ahcache.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WdmCompanionFilter.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\fileinfo.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\refsv1.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\filetrace.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Dmpusbstor.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\lltdio.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Dumpstorport.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\globmerger.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Diskdump.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\luafv.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Dumpata.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\srv2.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mrxsmb.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\srvnet.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\appid.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mrxsmb20.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rdbss.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mup.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\dfsc.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\tm.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ClipSp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\clfs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ntosext.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\hwpolicy.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\msfs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\npfs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\bfs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WindowsTrustedRT.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\storqosflt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\crashdmp.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\cnghwassist.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\SpbCx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\urscx01000.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\SerCx2.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\SerCx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\portcfg.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\HidSpiCx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mshidumdf.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mshidkmdf.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\dumpsdport.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\UcmUcsiCx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\UcmTcpciCx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ufx01000.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\IndirectKmd.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\UnionFS.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ipnat.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\cimfs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\wcifs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\bindflt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\win32kns.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\pacer.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\tape.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\scsiport.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mcd.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\stream.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\smclib.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\msgpioclx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\dxgkrnl.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mpsdrv.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\win32kbase.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\watchdog.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ProcLaunchMon.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\win32kbase_rs.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WifiCx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\vwififlt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\nwifi.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\bowser.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\storport.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WdFilter.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WdNisDrv.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\pdc.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Ucx01000.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\fsdepends.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Udecx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\cmimcext.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\Acx01000.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\sdport.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\TsUsbFlt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\filecrypt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mshwnclx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\WinAccel.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\acpiex.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\condrv.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\PEAuth.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\mmcss.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\winnat.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\ipt.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\rteth.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\fastfat.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\MbbCx.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\exfat.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\iorate.sys
+  2026-04-01 08:18  C:\WINDOWS\system32\drivers\UCPD.sys
+
+--- Device Manager: ERROR or DEGRADED devices ---
+  [OK] No ERROR or DEGRADED devices found.
+
+--- AMD and ASUS services inventory (all) ---
+  Review for new entries after updates. Running + Auto = worth scrutinizing.
+  amdacpbus                                          Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdacpbus.inf_amd64_1ef8c0c88c1e246e\amdacpbus.sys
+  amdfendr                                           Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdfendr.inf_amd64_bea53a1d416fbcfa\amdfendr.sys
+  amdfendrmgr                                        Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdfendr.inf_amd64_bea53a1d416fbcfa\amdfendrmgr.sys
+  amdgpio2                                           Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdgpio2.inf_amd64_e3ba65168b9dbb29\amdgpio2.sys
+  amdi2c                                             Running    Manual       C:\WINDOWS\system32\drivers\amdi2c.sys
+  AmdK8                                              Stopped    Manual       C:\WINDOWS\system32\drivers\amdk8.sys
+  AmdMicroPEP                                        Running    Boot         C:\WINDOWS\system32\DriverStore\FileRepository\amdmicropep.inf_amd64_0ee9b60764bf0bba\AmdMicroPEP.sys
+  amdpmf                                             Running    Manual       C:\WINDOWS\system32\drivers\amdpmf.sys
+  AmdPpkg                                            Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdppkg.inf_amd64_f57cfc457aa3e60b\AmdPpkg.sys
+  AmdPPM                                             Running    Manual       C:\WINDOWS\system32\drivers\amdppm.sys
+  amdpsp                                             Running    Boot         C:\WINDOWS\system32\drivers\amdpsp.sys
+  AMDSAFD                                            Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdsafd.inf_amd64_d4de13a10f2586d0\amdsafd.sys
+  amdsata                                            Stopped    Manual       C:\WINDOWS\system32\drivers\amdsata.sys
+  amdsbs                                             Stopped    Manual       C:\WINDOWS\system32\drivers\amdsbs.sys
+  amdsdwc                                            Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\amdsdwc.inf_amd64_8ff5662e24d13f62\amdsdwc.sys
+  amdsfhkmdf                                         Running    System       C:\WINDOWS\system32\drivers\amdsfhkmdf.sys
+  amduw23g-198974-eda2a421                           Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\u0198974.inf_amd64_dcac9659486b668a\B025819\amdkmdag.sys
+  amdwps                                             Running    Boot         C:\WINDOWS\system32\drivers\amdwps.sys
+  amdxata                                            Stopped    Manual       C:\WINDOWS\system32\drivers\amdxata.sys
+  AsusPTPDrv                                         Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\asusptpfilter.inf_amd64_ebab82ab1cf6be11\AsusPTPFilter.sys
+  AsusSAIO                                           Running    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\asussci2.inf_amd64_d5b92bc7afd7593a\ASUSSystemAnalysis\AsusSAIO.sys
+  HpSAMD                                             Stopped    Manual       C:\WINDOWS\system32\drivers\HpSAMD.sys
+  Ramdisk                                            Stopped    Manual       C:\WINDOWS\system32\drivers\ramdisk.sys
+  ROGKB                                              Stopped    Manual       C:\WINDOWS\system32\DriverStore\FileRepository\rogkb.inf_amd64_2f2233bdcdf1b092\ROGKB.sys
+  SmartSAMD                                          Stopped    Manual       C:\WINDOWS\system32\drivers\SmartSAMD.sys
+
+  [SVC] AMD Crash Defender Service                    Running    Automatic
+  [SVC] AMD External Events Utility                   Running    Automatic
+  [SVC] AmdPpkgSvc                                    Running    Automatic
+  [SVC] AsusAppService                                Running    Automatic
+  [SVC] ASUSOptimization                              Running    Automatic
+  [SVC] ASUSSoftwareManager                           Running    Automatic
+  [SVC] ASUSSwitch                                    Running    Automatic
+  [SVC] ASUSSystemAnalysis                            Running    Automatic
+  [SVC] ASUSSystemDiagnosis                           Running    Automatic
+

@@ -1,0 +1,18 @@
+﻿=== RyzenMaster Driver Kill Script ===
+Run at: 2026-04-02 09:11:39
+Action log:  C:\Users\edwar\ryzenmaster_kill_log_20260402_091139.txt
+State dump:  C:\Users\edwar\driver_state_dump_20260402_091139.txt
+
+--- [TARGETED] Checking for known problem kernel services ---
+  [OK] No services matching '*ryzenmaster*' found.
+
+--- [TARGETED] Checking for known problem .sys files ---
+  [SKIP]  Already disabled: AMDRyzenMasterDriver.sys.disabled
+  [SKIP]  Already disabled: AMDRyzenMasterDriver.sys.disabled_20260402_072454
+
+--- [TARGETED] Checking for known problem PnP device nodes ---
+  [OK] No RyzenMaster PnP device nodes found.
+
+--- Action Summary ---
+  [OK] No known problem drivers or .sys files found.
+

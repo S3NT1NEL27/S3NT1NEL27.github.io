@@ -1,0 +1,399 @@
+CLAUDE SESSION MEMORY BACKUP
+Last updated: 2026-04-02 (session 11 — Win 25H2 update audit, telemetry killed, machine purpose documented)
+(Reference this file with @ path if Claude loses context after a BSOD)
+
+=== MACHINE ===
+ASUS ROG Flow X13 2022 (GV301), Ryzen 9 6900HS, 16GB RAM (soldered)
+BIOS 331 (latest), Windows 11 Home 10.0.26200 — NOW ON 25H2 (upgraded this session via KB5054156)
+Wi-Fi: MediaTek MT7922 (driver 3.5.2.1376 / Dec 2025 build — UPDATED this session)
+SSD: Micron 2450 MTFDKBK1T0TFK, 1TB, firmware V5MA010
+Computer name: Work_laptop
+User profile: C:\Users\edwar
+
+=== MACHINE PURPOSE ===
+PRIMARY USE: AI agent sandbox / workflow environment.
+  - User runs Claude Code and AI agent pipelines as primary workload
+  - Incidental use: Firefox (email/web), Google Sheets (light Excel work)
+  - Microsoft/AMD/ASUS software is ALL under scrutiny: if it doesn't serve the agent, it's a problem
+  - Telemetry, background services, compute-hogs (GPU/RAM/CPU) are directly opposed to the machine's purpose
+  - Long-term goal: build a robust Kill-RyzenMasterDrivers.bat.ps1-style script that removes/disables/uninstalls
+    ALL non-essential software — not just RyzenMaster. Script grows as new offenders are identified.
+
+PHILOSOPHY:
+  Voluntary crash reporting (NT-era dialog model) is acceptable.
+  Background telemetry benefits Microsoft, not the user. Aggregate benefit is diffuse and
+  doesn't require individual participation. All passive telemetry is undesirable on this machine.
+
+=== BSOD HISTORY & FIXES ===
+Bugchecks: IRQL_NOT_LESS_OR_EQUAL, PAGE_FAULT_IN_NONPAGED_AREA
+Crash address: ntoskrnl.exe+4fb8c0
+10 crashes on 2/13 across 5 bugcheck codes (0x50, 0x0A, 0x162, 0xEF, 0x1E) - scatter pattern = memory corruption
+
+COMPLETED FIXES:
+- DDU clean install: AMD + NVIDIA GPU drivers
+- AMD chipset driver updated
+- Realtek audio driver updated
+- ASUS bloatware/Ryzen Master remnants removed
+- SFC/DISM: clean
+- Windows Memory Diagnostic: no errors
+- Cinebench 2026: stable (18495 multi-core)
+- BIOS reset to optimized defaults
+- Hyper-V disabled (bcdedit hypervisorlaunchtype Off)
+- Power scheme: High performance, hibernate off, standby timeouts 0
+- Battery driver reinstalled
+- Pagefile: 16GB initial / 32GB max
+- MediaTek MT7922 Wi-Fi power features all disabled
+- AMDRyzenMasterDriverV19 FULLY REMOVED (Session 11) ✓
+  - Service: disabled + deleted
+  - .sys renamed AMDRyzenMasterDriver.sys.disabled_20260402_072454 (via Kill script)
+- AMDRyzenMasterDriverV31 REMOVED (Session 10) ✓
+  - .sys renamed AMDRyzenMasterDriver.sys.disabled ✓
+- AMD SFH driver reinstalled (amd_chipset_software_8.02.18.557.exe) — 3/31/2026
+- MT7922 Wi-Fi driver updated to Dec 2025 build (3.5.2.1376) — 3/31/2026
+
+STATUS: Both RyzenMaster drivers fully killed as of Session 11. Monitoring resumes.
+Last BSOD: 4/2/2026 6:34 AM (caused by V31 which is now dead)
+
+=== SESSION 4 FINDINGS (2026-03-19) — MEMORY CORRUPTION CONFIRMED ===
+  - BlueScreenView checked: HUNDREDS of dumps over past few weeks
+  - Most recent dump (031226-13203-01.dmp, 3/12/2026):
+      Bugcheck: IRQL_NOT_LESS_OR_EQUAL (0x0000000a)
+      Caused by: ntoskrnl.exe+4fb8c0 (same address every time)
+      CRITICAL: Parameter 2 = 0xFF (IRQL at crash time)
+      Valid IRQL range is 0-31 (0x1F max). 0xFF = 255 is IMPOSSIBLE.
+      This is not a real IRQL value — it is CORRUPTED DATA in kernel memory.
+      ntoskrnl.exe is the VICTIM, not the cause. Something is writing
+      garbage into kernel memory structures.
+  - Combined with 2/13 scatter pattern (5 different bugcheck codes in one day),
+    this is the clearest possible evidence of RAM hardware failure.
+  - Windows Memory Diagnostic showed no errors — WMD is unreliable for LPDDR5,
+    does not stress test adequately. MemTest86+ is required.
+  - dsregcmd confirmed: machine is clean (no MDM, no Azure AD, no domain join)
+  - Smart App Control is in Enforced mode (noted by Claude desktop app) —
+    may need to disable if it blocks agent tooling; easy toggle, not MDM-pushed
+
+=== SESSION 5 FINDINGS (2026-03-31) ===
+
+RAM RULED OUT:
+  - MemTest86+ ran 18 hours, 20+ passes, ZERO errors
+  - RAM hardware failure is not the cause
+  - Memory investigation on hold
+
+NEW HYPOTHESIS — REMOVED INTEGRAL DRIVER(S):
+  During aggressive bloatware/telemetry cleanup sessions, we may have removed
+  something that was actually required (not just bloat). A missing kernel
+  dependency causes erratic, scatter-pattern crashes — different from a rogue
+  driver which usually crashes the same way repeatedly.
+
+DEVICE MANAGER AUDIT (2026-03-31) — Get-PnpDevice results:
+  Script used: C:\Users\edwar\check_devices.ps1
+
+  *** HIGH PRIORITY — AMD UMDF Sensor: Status ERROR ***
+    InstanceId: ACPI\AMDI0080\1
+    This is the AMD Sensor Fusion Hub (SFH) — handles laptop sensors
+    (accelerometer, gyroscope, ambient light sensor).
+    This is a LEGITIMATE AMD KERNEL COMPONENT, NOT bloatware.
+    Almost certainly removed/broken during cleanup sessions.
+    A faulting SFH driver can corrupt kernel memory structures,
+    especially during power state transitions (sleep/wake, lid close,
+    display switch) — fits the observed crash pattern.
+    *** WAS LEAD SUSPECT FOR BSODs — NOW FIXED ***
+    FIX: Reinstalled via AMD chipset package amd_chipset_software_8.02.18.557.exe
+
+  AMDRyzenMaster Device: Status DEGRADED
+    Ghost node leftover from RyzenMasterDriverV19 removal.
+    Expected — driver .sys is gone, device node remains. Low concern.
+
+  Generic Monitor (LQ134N1JW55): Status UNKNOWN
+    CM_PROB_PHANTOM, Present: False
+    Ghost node from dGPU (NVIDIA) MUX path — CONFIRMED BENIGN.
+    Active display node is "Integrated Monitor" Status OK, Present True.
+    NOT a BSOD contributor.
+
+  WAN Miniport entries (PPPOE, PPTP, IKEv2, etc.): Status UNKNOWN
+    Normal — these are always Unknown when VPN is not configured. Ignore.
+
+=== SESSION 6 FINDINGS (2026-03-31) ===
+
+COMPLETED THIS SESSION:
+
+  1. AMD SFH DRIVER — FIXED ✓
+    - Installed amd_chipset_software_8.02.18.557.exe, rebooted
+    - Verified with check_devices.ps1: ACPI\AMDI0080\1 no longer shows ERROR
+    - Device is gone from error list entirely — fix confirmed
+    - This was the lead BSOD suspect; 19 days crash-free since fix
+
+  2. GENERIC MONITOR (LQ134N1JW55) — INVESTIGATED, BENIGN ✓
+    - CM_PROB_PHANTOM, Present: False
+    - Ghost node from dGPU MUX path — normal, not a BSOD contributor
+
+  3. MT7922 WI-FI DRIVER — UPDATED AND CONFIRMED ✓
+    - Previous: 25.40.2.579 (May 2025)
+    - Updated to Dec 2025 build (binary version 3.5.2.1376)
+    - Note: "25.40.2.585" was the INSTALLER package version; PowerShell reports
+      the actual driver binary version (3.5.2.1376). Date 20251222 confirms new driver.
+    - Bluetooth adapter also updated in same package (1.1045.2.567, Dec 2025)
+
+  4. STORAGE HEALTH — CLEAN, RULED OUT ✓
+    - Micron 2450 MTFDKBK1T0TFK, firmware V5MA010
+    - SMART: Wear=0, Temp=31-32C (max 83C), no latency issues
+    - Event Viewer: ZERO disk error events (IDs 7, 11, 15, 51, 153, 157)
+    - Storage is NOT a BSOD contributor
+    - Worth running Micron Storage Executive to check for firmware update (low priority)
+
+  5. EVENT VIEWER / BUGCHECK ANALYSIS ✓
+    Crash history from WER (Event ID 1001):
+    - Last BSOD: 3/12/2026 (19 days ago) — strong positive signal
+    - Dominant bugcheck: 0x0000000A (IRQL_NOT_LESS_OR_EQUAL) — ~40+ occurrences
+    - 0x000000D1: param1==param4 in most cases = driver executing freed memory
+      (classic use-after-free, consistent with partially-removed RyzenMaster driver)
+    - 0x000000BE (ATTEMPTED_WRITE_TO_READONLY_MEMORY): 3 occurrences
+      param2=0x8a00000000102121 each time = driver writing to protected kernel memory
+    - 0x0000013A (KERNEL_MODE_HEAP_CORRUPTION): 2 occurrences
+    - All patterns consistent with AMDRyzenMasterDriverV19 corrupting kernel memory
+      while still partially loaded. Fixes applied; monitoring for recurrence.
+
+  6. WUAUSERV ERRORS IN EVENT LOG — INTENTIONAL, NOT A BSOD CAUSE ✓
+    - DCOM 10005 errors for wuauserv are expected
+    - Result of deliberate Windows Update hardening/restriction work done previously
+    - Not related to BSODs, can be ignored
+
+  7. AMDPMFSERVICE — RESOLVED, NON-ISSUE ✓
+    - Event 7034: "amdpmfservice service terminated unexpectedly" on both boots
+    - StartType=Manual — it fires at boot, fails to init, exits with error code
+    - No Application Error (1000) event = not a hard crash, just exits cleanly
+    - Likely failed due to SFH being broken; may self-resolve now SFH is fixed
+    - Not a BSOD risk. Monitoring only.
+
+  8. DRIVER AUDIT — COMPLETED ✓
+    - NVIDIA dGPU: 32.0.15.9186 (Jan 2026) — CURRENT, no action needed
+    - AMD Radeon iGPU (Radeon 680M): UPDATED (see Session 7)
+      * ACP HDA Node: no driver installed (no ClassGuid, no INF) — low priority
+
+=== SESSION 7 FINDINGS (2026-03-31) ===
+
+AMD iGPU DRIVER — UPDATED AND SEATED ✓
+  - DDU ran in Safe Mode, wiped old driver
+  - After DDU, Windows auto-installed a generic fallback: 31.0.12028.21003 (June 2024) — older than before
+  - Downloaded AMD Adrenalin installer (Radeon RX 6000M Series, Win11 64-bit)
+  - No "Custom Install" option — used Software Type dropdown: selected "Driver only"
+  - Final installed driver: 32.0.21043.5001 (March 2026) ← CURRENT
+  - AMD Software 26.3.1 (light Adrenalin) also installed — normal with "Driver only" selection
+  - AMD Crash Defender Service added — legitimate AMD watchdog, Automatic, Running
+  - amdpmfservice: still Stopped/Manual — expected, non-issue
+  - Reboot done — driver confirmed seated via Get-WmiObject (32.0.21043.5001) ✓
+
+KB5077181 — INSTALLED AND CLEARED ✓
+  - 2026-02 Security Update (26200.7840) installed and cleared by reboot
+
+=== SESSION 8 FINDINGS (2026-03-31) ===
+
+REBOOT POST SESSION 7 — COMPLETED ✓
+  - AMD iGPU driver 32.0.21043.5001 confirmed seated
+  - NVIDIA dGPU 32.0.15.9186 confirmed unchanged
+  - Device Manager post-reboot: AMD SFH (ACPI\AMDI0080\1) still absent from error list — fix holding ✓
+  - New entries (all benign):
+      * Microsoft Hypervisor Service — Degraded (expected, Hyper-V disabled via bcdedit)
+      * AMD-UWP Version Control — Unknown (new AMD software component from driver install, not a kernel driver)
+      * USB entries (SanDisk, MT86PLUS, mouse) — MemTest86+ USB drive was plugged in
+
+VMP SETUP — IN PROGRESS
+  - dism /enable-feature VirtualMachinePlatform (no source): hung at 14.6% — WU loop confirmed
+  - dism /LimitAccess: failed 0x800f0912 — files not cached locally
+  - ISO needed: Win11_25H2 ISO in Downloads was 0 bytes (empty, never downloaded)
+  - Rufus 4.13.exe downloaded from rufus.ie
+  - Rufus DOWNLOAD failed at 75% — handshake/IP block error from Microsoft servers
+  - ISO approach abandoned
+
+  *** SESSION 9 INVESTIGATION — "Fix problems using Windows Update" BLOCKED ***
+  - Button greyed out ("This option is currently unavailable")
+  - Investigated causes:
+      * Group Policy (HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate): KEY DOES NOT EXIST — not the cause
+      * WinRE: ENABLED (reagentc /info confirmed) — not the cause
+      * wuauserv: Running, StartType=Manual — not the cause
+      * Known blocking registry values (SetDisableUXWUAccess, TargetReleaseVersion, etc.): ALL EMPTY — not the cause
+      * IsOOBEInProgress: was set to 1 (should be 0) — fixed via Set-ItemProperty, still greyed out after fix
+  - Button remains unavailable — root cause unknown, pursuing ISO path instead
+
+  *** CURRENT PLAN — ISO via UUPdump ***
+  - microsoft.com direct download BLOCKED (error 715-123130) — same IP issue as Rufus
+  - UUPdump workaround: uupdump.net → Win 11 25H2 (26200.8117) amd64 → English (US) → Home
+    → "Download and convert to ISO" → Create download package → run uup_download_windows.cmd as admin
+  - ISO builds locally from Microsoft's CDN (~6GB download + conversion time)
+
+  *** AFTER ISO IS READY — DISM COMMANDS (admin PowerShell/CMD) ***
+  Step 1: Double-click ISO to mount it, note the drive letter (e.g. D:, E:)
+  Step 2: Run:
+            dism /online /enable-feature /featurename:VirtualMachinePlatform /all /LimitAccess /Source:<drive>:\sources\sxs /norestart
+            dism /online /enable-feature /featurename:HypervisorPlatform /all /LimitAccess /Source:<drive>:\sources\sxs /norestart
+  Step 3: Reboot once
+  Step 4: If still blocked — check Smart App Control (Enforced mode may interfere)
+  Step 5: Last resort — in-place repair upgrade using the same ISO (setup.exe)
+
+=== SESSION 10 FINDINGS (2026-04-02) ===
+
+NEW BSOD — 4/2/2026 6:34 AM (21 days after 3/12/2026):
+  Bugcheck: 0x0000000A (IRQL_NOT_LESS_OR_EQUAL)
+  Param 2 (IRQL): 0xFF — SAME impossible value as prior crashes = same memory corruption pattern
+  Param 4 (fault address): 0xfffff8038ea81337
+  BlueScreenView: Caused by ntoskrnl.exe+6be5e9 (victim, not cause — same as before)
+  Trigger: lid-open (resume from sleep) — no user activity, Claude desktop app open
+
+ROOT CAUSE — AMDRyzenMasterDriverV31 WAS RUNNING:
+  - Discovered via: Get-WmiObject Win32_SystemDriver | Where-Object PathName -like "*ryzen*"
+  - Service name: AMDRyzenMasterDriverV31, State: Running
+  - Path: C:\WINDOWS\system32\AMDRyzenMasterDriver.sys (NOT in drivers\ subfolder)
+  - .sys file dated 3/3/2026 — predates 3/31 session but was likely activated by AMD Adrenalin install
+  - V31 install source: AMD Adrenalin 26.3.1 / iGPU driver update done in Session 7 (3/31/2026)
+
+ALSO FOUND — V19 was never fully killed:
+  - START_TYPE was DEMAND_START (not DISABLED as thought from Session 5)
+  - Active .sys still present at C:\WINDOWS\system32\drivers\AMDRyzenMasterDriver.sys (7/1/2021)
+    alongside the .disabled copy we made (8/11/2021) — AMD chipset install (3/31) restored original
+  - LESSON: pnputil removal in Session 5 removed the INF package but not the service entry or .sys
+
+SESSION 10 COMPLETED ACTIONS:
+  AMDRyzenMasterDriverV31:
+    - sc.exe stop ✓
+    - sc.exe config start= disabled ✓
+    - sc.exe delete ✓
+    - .sys renamed to AMDRyzenMasterDriver.sys.disabled ✓
+
+  AMDRyzenMasterDriverV19:
+    - sc.exe config start= disabled ✓
+    - sc.exe delete ✓
+    - Rename .sys: BLOCKED — Access Denied (TrustedInstaller ACL) — resolved in Session 11
+
+  UUPdump ISO: download interrupted by storm — needs restart from uupdump.net
+
+=== SESSION 11 FINDINGS (2026-04-02) ===
+
+KILL SCRIPT FIX:
+  - Kill-RyzenMasterDrivers.bat.ps1 had a parse error: UTF-8 em dash (—) on line 120
+    read as CP1252 byte 0x94 (right double-quote), prematurely closing the string literal
+  - Fixed: replaced em dash with ASCII hyphen. Script now runs correctly.
+
+AMDRyzenMasterDriverV19 — FULLY KILLED ✓
+  - Kill script ran: service deleted, .sys renamed AMDRyzenMasterDriver.sys.disabled_20260402_072454
+  - Both V19 and V31 are now fully dead. No RyzenMaster service or .sys active.
+
+WINDOWS UPDATE AUDIT (2026-04-02):
+  Updates installed:
+    KB5083532 — Servicing Stack Update (bundled, cannot remove)
+    KB5054156 — Feature enablement: UPGRADED SYSTEM TO WIN 11 25H2 ← significant
+    KB5079473 — March 2026 cumulative security update (83 CVEs)
+    KB5066128 — .NET Framework 3.5/4.8.1 security patch
+
+  25H2 notable additions:
+    - Sysmon added as in-box optional feature (State: DISABLED — not auto-enabled) ✓
+    - SustainabilityTelemetry scheduled task added (now disabled — see below)
+
+  Driver state post-update:
+    - No RyzenMaster reinstall detected ✓
+    - Device Manager: NO errors or degraded devices ✓
+    - All modified .sys files are standard Windows components (timestamp 2026-04-01 07:18)
+
+TELEMETRY KILLED (Session 11) ✓:
+  Scheduled tasks — all DISABLED:
+    - Microsoft Compatibility Appraiser (app inventory + compat data)
+    - UsbCeip (USB device telemetry)
+    - DmClient (feedback/survey prompts)
+    - DmClientOnScenarioDownload (feedback download)
+    - SustainabilityTelemetry (energy usage reporting — new in 25H2)
+
+  Service — STOPPED + DISABLED:
+    - DiagTrack (Connected User Experiences and Telemetry) — the main telemetry pipe
+
+  Registry (already configured, unchanged):
+    - HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection\AllowTelemetry = 0
+    - HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection\AllowTelemetry = 0
+
+=== NEXT STEPS ===
+1. ~~AMDRyzenMasterDriverV19 .sys rename~~ — DONE ✓ (Session 11, via kill script)
+2. Reboot — verify both RyzenMaster drivers gone via Get-WmiObject Win32_SystemDriver
+3. After reboot — re-run Kill script to confirm clean state
+4. Monitor crash frequency
+5. *** LONG-TERM PROJECT: Expand kill script into full machine hardening script ***
+   - Kill script (Kill-RyzenMasterDrivers.bat.ps1) to evolve into a comprehensive
+     "non-essential software elimination" script for AI agent sandbox use
+   - Scope: any service, scheduled task, or process consuming GPU/RAM/CPU
+     that does not directly serve AI agent workflows
+   - Candidates already identified: ASUS services (AsusAppService, ASUSOptimization,
+     ASUSSoftwareManager, ASUSSwitch, ASUSSystemAnalysis, ASUSSystemDiagnosis),
+     AMD Crash Defender (amdfendr/amdfendrmgr), amdpmfservice, CDPSvc, PcaSvc, WerSvc
+   - Build incrementally: audit → test disable → confirm stable → add to script
+6. CoWork / VMP setup — IN PROGRESS
+   UUPdump ISO interrupted by storm — restart download from uupdump.net
+   NOTE: Machine is now on 25H2. UUPdump target should match: 26200.xxxx amd64, English US, Home
+   Then: mount ISO, run DISM /LimitAccess /Source commands (see VMP SETUP section), reboot
+7. Safe Mode differential test (only if crashes resume)
+8. Micron Storage Executive — check for SSD firmware update (low priority)
+9. AMDRyzenMaster ghost node — cosmetic cleanup (very low priority)
+
+=== COWORK / VMP STATUS ===
+PROBLEM CHAIN:
+  1. Machine has recurring BSODs (see history above)
+  2. Each BSOD kills active Claude Code session and wipes context/memory
+  3. Claude Code auto-memory in .claude/ does NOT survive reboots on this machine
+  4. Result: every crash = full context loss, have to re-explain everything from scratch
+
+COWORK SETUP:
+  - In Claude DESKTOP APP (not Claude Code CLI) — INSTALLED 2026-03-12
+  - Paid plan covers both Claude Code and CoWork
+  - Help: support.claude.com/en/articles/13345190-get-started-with-cowork
+
+COWORK BLOCKER — VMP INSTALL FAILING:
+  - Root cause: Windows Update download loop (KB5077241 bug on Win11 26200)
+  - CBS log confirmed: WULib DownloadProgress cycling forever, never completes
+  - /LimitAccess DISM failed (0x800f0912 — source files not in local store)
+  - CURRENT PLAN: Use Windows 11 25H2 ISO as DISM source (machine now on 25H2)
+    1. Download ISO via UUPdump (uupdump.net) — microsoft.com blocked (error 715-123130)
+    2. Mount ISO (double-click), note drive letter
+    3. Run:
+         dism /online /enable-feature /featurename:VirtualMachinePlatform /all /LimitAccess /Source:<drive>:\sources\sxs /norestart
+         dism /online /enable-feature /featurename:HypervisorPlatform /all /LimitAccess /Source:<drive>:\sources\sxs /norestart
+    4. Reboot once
+    5. If still blocked: check Smart App Control (Enforced mode)
+    6. Last resort: in-place repair upgrade
+
+=== METHODOLOGY NOTES ===
+- Do a web search FIRST before manually troubleshooting.
+  VMP/KB5077241 fix found in 2 minutes via WebSearch after ~7 hours of manual attempts.
+- AllowTelemetry=0 is the registry floor but doesn't stop scheduled tasks — disable those separately.
+- Sysmon (added in 25H2 via KB5079473) is DISABLED by default. Do not enable it.
+  If future updates auto-enable it, add to kill script.
+
+=== TOOLS/NOTES ===
+- BlueScreenView installed for dump analysis
+- check_devices.ps1: C:\Users\edwar\check_devices.ps1
+- check_wifi_driver.ps1: C:\Users\edwar\check_wifi_driver.ps1
+- Kill-RyzenMasterDrivers.bat.ps1: C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1
+    *** PRIMARY POST-UPDATE MAINTENANCE SCRIPT — RUN AFTER ANY AMD/ASUS/WINDOWS UPDATE ***
+    Detects + kills any AMDRyzenMasterDriver version (V19, V31, future versions).
+    Saves a timestamped action log AND a full system driver state dump.
+    To run: open PowerShell as admin →
+      powershell -ExecutionPolicy Bypass -File "C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1"
+
+    DESIGN PHILOSOPHY:
+    Living repository for all services/drivers disabled/eliminated that recur after updates.
+    As new problem drivers or telemetry components are discovered, add them to the script.
+    The script grows with the problem history. Long-term: expand scope beyond RyzenMaster
+    to cover all non-essential software opposing AI agent workloads.
+
+    DUMP FILE RATIONALE:
+    AMD/ASUS/Microsoft may rename problem services on future updates.
+    Compare state dumps before/after any update to catch renamed or new problem drivers.
+    Look for: new kernel drivers, unusual paths, recently-modified .sys files, device errors,
+    new AMD/ASUS service inventory.
+
+    WHEN TO RUN:
+    - After any AMD driver/software update (Adrenalin, chipset, SFH)
+    - After any ASUS update (Armoury Crate, ASUS services)
+    - After any Windows cumulative or feature update
+    - After any reboot following the above
+    - If BSODs resume
+
+- Full Perplexity session log: C:\Users\edwar\Downloads\i am frequently getting an irql_not_less_or_equal.md
+- Bash mangles PowerShell $_ — use -File flag with .ps1 or -Command for one-liners
+- wmic not available (Win11), use PowerShell CIM/WMI cmdlets
+- Pagefile via registry: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PagingFiles

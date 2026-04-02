@@ -1,0 +1,633 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\WINDOWS\system32> Claude
+ ▐▛███▜▌   Claude Code v2.1.90
+▝▜█████▛▘  Sonnet 4.6 · Claude Pro
+  ▘▘ ▝▝    C:\WINDOWS\system32
+
+> Check the dekstop Claude Session Notes, I will run the kill script                                                    
+  Read 1 file (ctrl+o to expand)
+
+● Context loaded. Here's a summary vs. what was in MEMORY.md — the desktop file is significantly more current:          
+  Major deltas (desktop file wins):
+                                                                                                                          ┌────────────────┬─────────────────────────────────┬─────────────────────────────────────────────────────────────┐
+  │     Topic      │        MEMORY.md (stale)        │                   Desktop file (current)                    │      ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ Last BSOD      │ 3/12/2026                       │ 4/2/2026 6:34 AM (new crash this morning)                   │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ RyzenMaster    │ Not mentioned                   │ Found running, killed in Session 10                         │
+  │ V31            │                                 │                                                             │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ RyzenMaster    │ "Renamed .disabled"             │ Fully killed in Session 11 via kill script ✓                │
+  │ V19            │ (incomplete)                    │                                                             │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ Windows        │ 10.0.26200                      │ Now on 25H2 (upgraded via KB5054156)                        │
+  │ version        │                                 │                                                             │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ Telemetry      │ Not documented                  │ DiagTrack disabled, 5 scheduled tasks killed ✓              │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ Kill script    │ Basic mention                   │ Em dash parse error fixed; now the primary maintenance      │
+  │                │                                 │ script                                                      │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ Machine        │ Not documented                  │ AI agent sandbox — all non-essential software under         │
+  │ purpose        │                                 │ scrutiny                                                    │
+  └────────────────┴─────────────────────────────────┴─────────────────────────────────────────────────────────────┘
+
+  Current state: Both V19 and V31 are dead. You just rebooted (Session 11). You're about to run the kill script to
+  confirm clean state — that's exactly what the next steps say to do.
+
+  After the kill script runs, the key things to check:
+  - No AMDRyzenMasterDriver* entries in the driver dump (neither V19 nor V31 should appear)
+  - No new AMD/ASUS services introduced by the 25H2 update
+
+  Go ahead and run it. Paste the output when done and I'll review.
+
+> PS C:\WINDOWS\system32> @"C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1"                                             At line:1 char:3                                                                                                        + @"C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1"
++   ~
+No characters are allowed after a here-string header but before the end of the line.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnexpectedCharactersAfterHereStringHeader
+
+PS C:\WINDOWS\system32>
+  ⎿  Read ..\..\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1 (276 lines)
+
+● The @ prefix is Claude Code syntax for loading files into context — it's not a PowerShell command. The kill script's
+  own instructions say to run it as:
+
+  powershell -ExecutionPolicy Bypass -File "C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1"                             
+  Or if you're already in an admin PowerShell session:                                                                  
+  & "C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1"
+
+  Make sure the PowerShell window is running as Administrator (right-click → Run as administrator), since the script has
+   #Requires -RunAsAdministrator.
+
+> Why did you write that script with requires run as administrator?                                                     
+● I didn't write it — that script was developed across previous sessions before this conversation. I just read it this
+  session when the system loaded it as context.
+                                                                                                                          The #Requires -RunAsAdministrator makes sense for what it does though: sc.exe stop/config/delete, takeown, icacls, and   Rename-Item on files in C:\WINDOWS\system32 all require admin privileges. Without it, those operations would silently   fail or throw access denied errors (which is exactly what happened with the V19 .sys rename in Session 10 before the
+  script was fixed).
+
+> Sounds like a needless pain point to me. Only you and I use this box. The script only ever benefits you by cleaning   the machine. Seems like you might "want" someone to accidentally click it. If one were to want, that is                 
+● Removing #Requires -RunAsAdministrator won't actually help — the underlying operations (sc.exe stop/delete, takeown,
+  icacls, renaming files in C:\WINDOWS\system32) still require admin rights. Without the directive, the script just
+  runs, gets access denied partway through, and leaves things half-done instead of failing early with a clear message.  
+  The directive is a guardrail against silent partial failure, not a gatekeeping choice.                                
+  If you want lower friction, the real fix is a self-elevation block at the top — the script relaunches itself as admin
+  automatically if it detects it's not elevated. That way double-clicking it just works. Want me to add that?
+
+> That sounds wise. In the mean time, here is the output: PS C:\WINDOWS\system32> &                                     "C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1"                                                                        === RyzenMaster Driver Kill Script ===
+Run at: 2026-04-02 09:11:39
+Action log:  C:\Users\edwar\ryzenmaster_kill_log_20260402_091139.txt
+State dump:  C:\Users\edwar\driver_state_dump_20260402_091139.txt
+
+--- [TARGETED] Checking for known problem kernel services ---
+  [OK] No services matching '*ryzenmaster*' found.
+
+--- [TARGETED] Checking for known problem .sys files ---
+  [SKIP]  Already disabled: AMDRyzenMasterDriver.sys.disabled
+  [SKIP]  Already disabled: AMDRyzenMasterDriver.sys.disabled_20260402_072454
+
+--- [TARGETED] Checking for known problem PnP device nodes ---
+  [OK] No RyzenMaster PnP device nodes found.
+
+--- Action Summary ---
+  [OK] No known problem drivers or .sys files found.
+
+Action log saved: C:\Users\edwar\ryzenmaster_kill_log_20260402_091139.txt
+
+--- Building state dump for incongruency review ---
+State dump saved: C:\Users\edwar\driver_state_dump_20260402_091139.txt
+
+Done. Both files written to C:\Users\edwar\
+PS C:\WINDOWS\system32>
+
+● Clean. Both drivers dead, no new RyzenMaster entries, no PnP ghost nodes.
+
+  The two .disabled files showing under [SKIP] are the renamed .sys files from Sessions 10 and 11 — exactly what we       expect to see.
+                                                                                                                          Now let's see the state dump to check for any new anomalies introduced by the 25H2 upgrade. Paste the contents of
+  C:\Users\edwar\driver_state_dump_20260402_091139.txt and I'll review it for anything suspicious.
+
+> @"C:\Users\edwar\driver_state_dump_20260402_091139.txt"                                                               
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● File is large. Let me pull the key sections:
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Now let me check the recently modified .sys files:
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Clean bill of health. Here's the analysis:
+
+  No RyzenMaster anything — confirmed dead ✓
+  No Device Manager errors or degraded devices ✓                                                                          Recently modified .sys files — all timestamped 2026-04-01 08:18, all standard Windows components. That's KB5079473
+  (March cumulative update). Normal ✓                                                                                   
+  The NON-STANDARD section is mostly noise — DriverStore\FileRepository\ is where Windows legitimately stores PnP driver
+   packages in modern Windows. It's not actually suspicious. Every third-party driver (NVIDIA, AMD, MediaTek, ASUS)
+  lives there by design. The script flags it because it's not \System32\drivers\, but that's a false positive category
+  for this machine. Worth noting for when you expand the script — that filter needs refinement.
+
+  Items worth watching from the AMD/ASUS inventory:
+
+  ┌─────────────────────────┬─────────┬────────┬───────────────────────────────────────────────────────────────┐
+  │         Service         │  State  │ Start  │                             Notes                             │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ amdfendr / amdfendrmgr  │ Running │ Manual │ AMD Crash Defender — on your candidates list                  │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ AsusSAIO / ATKWMIACPIIO │ Running │ Manual │ ASUS System Analysis/Optimization kernel drivers              │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ AsusAppService          │ Running │ Auto   │ Candidate for kill script                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ ASUSOptimization        │ Running │ Auto   │ Candidate                                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ ASUSSoftwareManager     │ Running │ Auto   │ Candidate                                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ ASUSSwitch              │ Running │ Auto   │ Candidate                                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ ASUSSystemAnalysis      │ Running │ Auto   │ Candidate                                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ ASUSSystemDiagnosis     │ Running │ Auto   │ Candidate                                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ amdsfhkmdf              │ Running │ System │ AMD SFH (sensor hub) — the one we fixed. Running is correct ✓ │
+  └─────────────────────────┴─────────┴────────┴───────────────────────────────────────────────────────────────┘
+
+  The 5 ASUS services all running Automatic are the next logical expansion targets for the kill script. Those are pure
+  ASUS software overhead with no benefit to an AI agent workload.
+
+  Want to start adding those to the script now, or handle the self-elevation block first?
+
+✻ Crunched for 51s
+
+> I would wager that you could easily do both. But first, some planning. We have been battling BSOD for a while, as     evidenced by the desktop Claude Session notes. While addressing these telemetry pain-points, it stands to reason that   we should scan online to find out the proper function of everything we elevate as candidates for deletion/force         stop/set to disable, and compare those planned choices against potential for creating additional BSOD crashes. Rapid    gutting of unwanted background software "gifted" to us by Microsoft/Asus/AMD is what got us into this mess.             
+● Exactly right. The lesson from Sessions 4-10 is clear: the SFH driver broke because it got caught in aggressive
+  cleanup, and that was a real kernel component. We need to know what each candidate actually does before touching it.
+                                                                                                                          Let me research all the candidates in parallel before we write a single line.
+                                                                                                                        ● 2 background agents launched (↓ to manage)
+   ├─ Research AMD Crash Defender services
+   └─ Research ASUS background services                                                                                 
+● Good call. Two research agents are running in parallel — one covering the AMD Crash Defender stack, one covering the
+  ASUS service stack. They'll cross-reference against BSOD risk specifically, not just "is this bloatware."
+                                                                                                                          While they work: the planning framework I'd propose for the expanded kill script is three tiers, not a binary
+  kill/keep:                                                                                                            
+  - Tier 1 — Kill (safe to stop + disable + delete service): pure telemetry/reporting with no hardware dependency
+  - Tier 2 — Disable only (stop + set StartType=Disabled, leave .sys in place): services that are overhead but touch
+  hardware — disable so they don't run, but don't rename/delete in case re-enabling is ever needed
+  - Tier 3 — Monitor only (log to dump, don't touch): anything where the risk of disabling is non-trivial or uncertain
+
+  That way we're not repeating the SFH mistake, and the script documents why each decision was made. Does that framework
+   work for you, or would you adjust the tiers?
+
+● Agent "Research AMD Crash Defender services" completed
+
+● AMD research is in. Still waiting on the ASUS agent. Here's the AMD verdict while we wait:
+
+  ---                                                                                                                     AMD Crash Defender stack (amdfendr + amdfendrmgr + AMD Crash Defender Service)
+  - Pure telemetry. No hardware function.                                                                                 - Ironically, amdfendr.sys has a documented failure bucket (LKD_0xA1000005) — it's a kernel-mode driver that hooks the
+   crash path, and bugs in it can cause or worsen crashes. This one is actively working against us.
+  - Verdict: Tier 1 Kill. Stop service first, then disable both kernel drivers.
+
+  AMD External Events Utility
+  - Manages FreeSync, AMD hotkeys, and display hotplug events. Userspace only, no BSOD risk.
+  - Zero value on an AI workload machine with no gaming.
+  - Verdict: Tier 1 Kill (or Manual if you ever use an external display).
+
+  AmdPpkg + AmdPpkgSvc
+  - Delivers AMD's tuned power/frequency profiles to the 6900HS. Real hardware policy work.
+  - Disabling it means Windows stock power management, which on a Rembrandt mobile chip could affect thermal behavior
+  and sustained compute performance.
+  - Verdict: Tier 3 Monitor only. Do not touch. This one actually serves the AI agent workload.
+
+  ---
+  Waiting on the ASUS agent before we finalize the plan and write any code.
+
+● Agent "Research ASUS background services" completed
+
+● Both agents done. Here's the full consolidated decision table:
+
+  ---                                                                                                                     AMD Stack
+
+  ┌─────────────────────┬───────────┬───────────────┬──────────────────────────────────────────────────────────────┐
+  │       Service       │   Tier    │    Verdict    │                            Reason                            │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+  │ AMD Crash Defender  │ 1 — Kill  │ Stop +        │ Pure telemetry, stop this first before the kernel drivers    │
+  │ Service             │           │ disable       │                                                              │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+  │ amdfendr (kernel)   │ 1 — Kill  │ Disable on    │ Documented BSOD causation (LKD_0xA1000005_amdfendr) — this   │
+  │                     │           │ next boot     │ one is actively working against us                           │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+  │ amdfendrmgr         │ 1 — Kill  │ Disable on    │ Same risk, must be paired with amdfendr                      │
+  │ (kernel)            │           │ next boot     │                                                              │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+  │ AMD External Events │ 1 — Kill  │ Stop +        │ FreeSync/hotkeys — zero value on AI workload                 │
+  │  Utility            │           │ disable       │                                                              │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+  │ AmdPpkg +           │ 3 —       │ Do not touch  │ Delivers AMD-tuned power profiles to the 6900HS — serves the │
+  │ AmdPpkgSvc          │ Monitor   │               │  workload                                                    │
+  └─────────────────────┴───────────┴───────────────┴──────────────────────────────────────────────────────────────┘
+
+  ASUS Stack
+
+  ┌──────────────────────────┬──────────┬─────────────────┬────────────────────────────────────────────────────────┐
+  │         Service          │   Tier   │     Verdict     │                         Reason                         │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ AsusSAIO (kernel)        │ 2 —      │ Stop + disable, │ Same driver family as AsUpIO.sys — documented BSOD     │
+  │                          │ Disable  │  no delete      │ history across ROG systems                             │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ASUSSystemAnalysis       │ 1 — Kill │ Stop + disable  │ Userspace front-end for AsusSAIO diagnostics           │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ASUSSystemDiagnosis      │ 1 — Kill │ Stop + disable  │ Same — diagnostic UI bloat                             │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ AsusAppService           │ 1 — Kill │ Stop + disable  │ MyASUS UI daemon, no hardware dependency               │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ASUSSoftwareManager      │ 1 — Kill │ Stop + disable  │ Silent OTA updater — actively dangerous, can reinstall │
+  │                          │          │                 │  what we remove                                        │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ASUSSwitch               │ 1 — Kill │ Stop + disable  │ PC migration tool, not GPU MUX — pure bloat            │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ROGKB (kernel, already   │ 2 —      │ Set disabled    │ ROG key → Armoury Crate, already dead, formalize it    │
+  │ stopped)                 │ Disable  │                 │                                                        │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ATKWMIACPIIO (kernel)    │ 3 —      │ Do not touch    │ Fn key ACPI event interception — low overhead,         │
+  │                          │ Monitor  │                 │ removing it kills brightness/fan hotkeys               │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ASUSOptimization         │ ?        │ Need your input │ Executes the Fn hotkey actions — if you use screen     │
+  │                          │          │                 │ brightness keys or fan mode toggle, this has to stay   │
+  └──────────────────────────┴──────────┴─────────────────┴────────────────────────────────────────────────────────┘
+
+  ---
+  Two questions before I write a line:
+
+  1. Fn hotkeys — do you use Fn+F5/F6 (brightness), Fn+F3/F4 (keyboard backlight), or the fan/performance mode toggle?
+  If yes, ASUSOptimization stays. If no, it's Tier 1.
+  2. External display — do you ever connect an external monitor? If yes, AMD External Events Utility should be set to
+  Manual rather than Disabled (it handles display hotplug detection).
+
+✻ Brewed for 49s
+
+> This is wise. Some services will be so deeply engrained into the operating system that we may have to add them to the  batch file as set to disable/force stop                                                                                
+● Exactly right — and that maps directly to the tier structure. The distinction in the script should be:
+
+  - sc delete — only for services with no OS/driver package registration (the pure userspace bloat: AsusAppService,       ASUSSoftwareManager, ASUSSwitch, etc.)
+  - sc config start= disabled only, no delete — for kernel drivers registered via PnP/INF packages (amdfendr,             amdfendrmgr, AsusSAIO, ROGKB). Deleting those service entries can leave the device node in a broken state or get
+  restored on next driver scan anyway. Disable is the correct lever.
+
+  The script will attempt delete on Tier 1 targets and fall back gracefully if it fails, but won't even attempt delete
+  on Tier 2 kernel drivers.
+
+  Before I touch the script — still need those two answers:
+
+  1. Fn hotkeys — brightness (Fn+F5/F6), keyboard backlight (Fn+F3/F4), fan/performance mode toggle — do you use any of
+  these? Determines whether ASUSOptimization gets killed or stays.
+  2. External display — ever connect an external monitor to this machine? Determines whether AMD External Events Utility
+   gets killed or set to Manual.
+
+> 1.Fn hotkeys yes, but only screen capture, sleep or fullscreen. I've never Fn for brightness, keyboard backlight, or  fan/performance ever before, and have no plans to do so. 2. I do not, but this could be useful in the future. How much  compute performance is this background service taking up? Could it just be added to script as set to disable until I    enable it?                                                                                                              
+● Good point, and it maps neatly to the tier structure we already have — Tier 2 is exactly that pattern (stop + disable,   no delete attempt).
+                                                                                                                          On your question about AMD External Events Utility: it's negligible at rest — typically under 5MB RAM and near-zero
+  CPU when no display events are happening. It only wakes up when a display connects/disconnects. Setting it to Manual    is the right call — it costs nothing at startup, and Windows can start it on demand when you need it.
+                                                                                                                          Let me verify the exact service names in the dump before writing anything, so sc.exe commands don't miss:
+
+✶ Computing… (1m 58s · ↓ 180 tokens)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────> 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  esc to interrupt
+                                                                                                                                                                                                                                                 ▐▛███▜▌   Claude Code v2.1.90
+▝▜█████▛▘  Sonnet 4.6 · Claude Pro
+  ▘▘ ▝▝    C:\WINDOWS\system32
+
+  Read 1 file (ctrl+o to expand)
+
+● Context loaded. Here's a summary vs. what was in MEMORY.md — the desktop file is significantly more current:
+
+  Major deltas (desktop file wins):
+
+  ┌────────────────┬─────────────────────────────────┬─────────────────────────────────────────────────────────────┐
+  │     Topic      │        MEMORY.md (stale)        │                   Desktop file (current)                    │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ Last BSOD      │ 3/12/2026                       │ 4/2/2026 6:34 AM (new crash this morning)                   │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ RyzenMaster    │ Not mentioned                   │ Found running, killed in Session 10                         │
+  │ V31            │                                 │                                                             │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ RyzenMaster    │ "Renamed .disabled"             │ Fully killed in Session 11 via kill script ✓                │
+  │ V19            │ (incomplete)                    │                                                             │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ Windows        │ 10.0.26200                      │ Now on 25H2 (upgraded via KB5054156)                        │
+  │ version        │                                 │                                                             │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ Telemetry      │ Not documented                  │ DiagTrack disabled, 5 scheduled tasks killed ✓              │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ Kill script    │ Basic mention                   │ Em dash parse error fixed; now the primary maintenance      │
+  │                │                                 │ script                                                      │
+  ├────────────────┼─────────────────────────────────┼─────────────────────────────────────────────────────────────┤
+  │ Machine        │ Not documented                  │ AI agent sandbox — all non-essential software under         │
+  │ purpose        │                                 │ scrutiny                                                    │
+  └────────────────┴─────────────────────────────────┴─────────────────────────────────────────────────────────────┘
+
+  Current state: Both V19 and V31 are dead. You just rebooted (Session 11). You're about to run the kill script to
+  confirm clean state — that's exactly what the next steps say to do.
+
+  After the kill script runs, the key things to check:
+  - No AMDRyzenMasterDriver* entries in the driver dump (neither V19 nor V31 should appear)
+  - No new AMD/ASUS services introduced by the 25H2 update
+
+  Go ahead and run it. Paste the output when done and I'll review.
+
+> PS C:\WINDOWS\system32> @"C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1"
+At line:1 char:3
++ @"C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1"
++   ~
+No characters are allowed after a here-string header but before the end of the line.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnexpectedCharactersAfterHereStringHeader
+
+PS C:\WINDOWS\system32>
+  ⎿  Read ..\..\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1 (276 lines)
+
+● The @ prefix is Claude Code syntax for loading files into context — it's not a PowerShell command. The kill script's
+  own instructions say to run it as:
+
+  powershell -ExecutionPolicy Bypass -File "C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1"
+
+  Or if you're already in an admin PowerShell session:
+
+  & "C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1"
+
+  Make sure the PowerShell window is running as Administrator (right-click → Run as administrator), since the script has
+   #Requires -RunAsAdministrator.
+
+> Why did you write that script with requires run as administrator?
+
+● I didn't write it — that script was developed across previous sessions before this conversation. I just read it this
+  session when the system loaded it as context.
+
+  The #Requires -RunAsAdministrator makes sense for what it does though: sc.exe stop/config/delete, takeown, icacls, and
+   Rename-Item on files in C:\WINDOWS\system32 all require admin privileges. Without it, those operations would silently
+   fail or throw access denied errors (which is exactly what happened with the V19 .sys rename in Session 10 before the
+  script was fixed).
+
+> Sounds like a needless pain point to me. Only you and I use this box. The script only ever benefits you by cleaning
+the machine. Seems like you might "want" someone to accidentally click it. If one were to want, that is
+
+● Removing #Requires -RunAsAdministrator won't actually help — the underlying operations (sc.exe stop/delete, takeown,
+  icacls, renaming files in C:\WINDOWS\system32) still require admin rights. Without the directive, the script just
+  runs, gets access denied partway through, and leaves things half-done instead of failing early with a clear message.
+
+  The directive is a guardrail against silent partial failure, not a gatekeeping choice.
+
+  If you want lower friction, the real fix is a self-elevation block at the top — the script relaunches itself as admin
+  automatically if it detects it's not elevated. That way double-clicking it just works. Want me to add that?
+
+> That sounds wise. In the mean time, here is the output: PS C:\WINDOWS\system32> &
+"C:\Users\edwar\Kill-RyzenMasterDrivers.bat.ps1"
+=== RyzenMaster Driver Kill Script ===
+Run at: 2026-04-02 09:11:39
+Action log:  C:\Users\edwar\ryzenmaster_kill_log_20260402_091139.txt
+State dump:  C:\Users\edwar\driver_state_dump_20260402_091139.txt
+
+--- [TARGETED] Checking for known problem kernel services ---
+  [OK] No services matching '*ryzenmaster*' found.
+
+--- [TARGETED] Checking for known problem .sys files ---
+  [SKIP]  Already disabled: AMDRyzenMasterDriver.sys.disabled
+  [SKIP]  Already disabled: AMDRyzenMasterDriver.sys.disabled_20260402_072454
+
+--- [TARGETED] Checking for known problem PnP device nodes ---
+  [OK] No RyzenMaster PnP device nodes found.
+
+--- Action Summary ---
+  [OK] No known problem drivers or .sys files found.
+
+Action log saved: C:\Users\edwar\ryzenmaster_kill_log_20260402_091139.txt
+
+--- Building state dump for incongruency review ---
+State dump saved: C:\Users\edwar\driver_state_dump_20260402_091139.txt
+
+Done. Both files written to C:\Users\edwar\
+PS C:\WINDOWS\system32>
+
+● Clean. Both drivers dead, no new RyzenMaster entries, no PnP ghost nodes.
+
+  The two .disabled files showing under [SKIP] are the renamed .sys files from Sessions 10 and 11 — exactly what we
+  expect to see.
+
+  Now let's see the state dump to check for any new anomalies introduced by the 25H2 upgrade. Paste the contents of
+  C:\Users\edwar\driver_state_dump_20260402_091139.txt and I'll review it for anything suspicious.
+
+> @"C:\Users\edwar\driver_state_dump_20260402_091139.txt"
+
+  Read 1 file (ctrl+o to expand)
+
+● File is large. Let me pull the key sections:
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Now let me check the recently modified .sys files:
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Clean bill of health. Here's the analysis:
+
+  No RyzenMaster anything — confirmed dead ✓
+  No Device Manager errors or degraded devices ✓
+  Recently modified .sys files — all timestamped 2026-04-01 08:18, all standard Windows components. That's KB5079473
+  (March cumulative update). Normal ✓
+
+  The NON-STANDARD section is mostly noise — DriverStore\FileRepository\ is where Windows legitimately stores PnP driver
+   packages in modern Windows. It's not actually suspicious. Every third-party driver (NVIDIA, AMD, MediaTek, ASUS)
+  lives there by design. The script flags it because it's not \System32\drivers\, but that's a false positive category
+  for this machine. Worth noting for when you expand the script — that filter needs refinement.
+
+  Items worth watching from the AMD/ASUS inventory:
+
+  ┌─────────────────────────┬─────────┬────────┬───────────────────────────────────────────────────────────────┐
+  │         Service         │  State  │ Start  │                             Notes                             │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ amdfendr / amdfendrmgr  │ Running │ Manual │ AMD Crash Defender — on your candidates list                  │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ AsusSAIO / ATKWMIACPIIO │ Running │ Manual │ ASUS System Analysis/Optimization kernel drivers              │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ AsusAppService          │ Running │ Auto   │ Candidate for kill script                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ ASUSOptimization        │ Running │ Auto   │ Candidate                                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ ASUSSoftwareManager     │ Running │ Auto   │ Candidate                                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ ASUSSwitch              │ Running │ Auto   │ Candidate                                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ ASUSSystemAnalysis      │ Running │ Auto   │ Candidate                                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ ASUSSystemDiagnosis     │ Running │ Auto   │ Candidate                                                     │
+  ├─────────────────────────┼─────────┼────────┼───────────────────────────────────────────────────────────────┤
+  │ amdsfhkmdf              │ Running │ System │ AMD SFH (sensor hub) — the one we fixed. Running is correct ✓ │
+  └─────────────────────────┴─────────┴────────┴───────────────────────────────────────────────────────────────┘
+
+  The 5 ASUS services all running Automatic are the next logical expansion targets for the kill script. Those are pure
+  ASUS software overhead with no benefit to an AI agent workload.
+
+  Want to start adding those to the script now, or handle the self-elevation block first?
+
+✻ Crunched for 51s
+
+> I would wager that you could easily do both. But first, some planning. We have been battling BSOD for a while, as
+evidenced by the desktop Claude Session notes. While addressing these telemetry pain-points, it stands to reason that
+we should scan online to find out the proper function of everything we elevate as candidates for deletion/force
+stop/set to disable, and compare those planned choices against potential for creating additional BSOD crashes. Rapid
+gutting of unwanted background software "gifted" to us by Microsoft/Asus/AMD is what got us into this mess.
+
+● Exactly right. The lesson from Sessions 4-10 is clear: the SFH driver broke because it got caught in aggressive
+  cleanup, and that was a real kernel component. We need to know what each candidate actually does before touching it.
+
+  Let me research all the candidates in parallel before we write a single line.
+
+● 2 background agents launched (↓ to manage)
+   ├─ Research AMD Crash Defender services
+   └─ Research ASUS background services
+
+● Good call. Two research agents are running in parallel — one covering the AMD Crash Defender stack, one covering the
+  ASUS service stack. They'll cross-reference against BSOD risk specifically, not just "is this bloatware."
+
+  While they work: the planning framework I'd propose for the expanded kill script is three tiers, not a binary
+  kill/keep:
+
+  - Tier 1 — Kill (safe to stop + disable + delete service): pure telemetry/reporting with no hardware dependency
+  - Tier 2 — Disable only (stop + set StartType=Disabled, leave .sys in place): services that are overhead but touch
+  hardware — disable so they don't run, but don't rename/delete in case re-enabling is ever needed
+  - Tier 3 — Monitor only (log to dump, don't touch): anything where the risk of disabling is non-trivial or uncertain
+
+  That way we're not repeating the SFH mistake, and the script documents why each decision was made. Does that framework
+   work for you, or would you adjust the tiers?
+
+● Agent "Research AMD Crash Defender services" completed
+
+● AMD research is in. Still waiting on the ASUS agent. Here's the AMD verdict while we wait:
+
+  ---
+  AMD Crash Defender stack (amdfendr + amdfendrmgr + AMD Crash Defender Service)
+  - Pure telemetry. No hardware function.
+  - Ironically, amdfendr.sys has a documented failure bucket (LKD_0xA1000005) — it's a kernel-mode driver that hooks the
+   crash path, and bugs in it can cause or worsen crashes. This one is actively working against us.
+  - Verdict: Tier 1 Kill. Stop service first, then disable both kernel drivers.
+
+  AMD External Events Utility
+  - Manages FreeSync, AMD hotkeys, and display hotplug events. Userspace only, no BSOD risk.
+  - Zero value on an AI workload machine with no gaming.
+  - Verdict: Tier 1 Kill (or Manual if you ever use an external display).
+
+  AmdPpkg + AmdPpkgSvc
+  - Delivers AMD's tuned power/frequency profiles to the 6900HS. Real hardware policy work.
+  - Disabling it means Windows stock power management, which on a Rembrandt mobile chip could affect thermal behavior
+  and sustained compute performance.
+  - Verdict: Tier 3 Monitor only. Do not touch. This one actually serves the AI agent workload.
+
+  ---
+  Waiting on the ASUS agent before we finalize the plan and write any code.
+
+● Agent "Research ASUS background services" completed
+
+● Both agents done. Here's the full consolidated decision table:
+
+  ---
+  AMD Stack
+
+  ┌─────────────────────┬───────────┬───────────────┬──────────────────────────────────────────────────────────────┐
+  │       Service       │   Tier    │    Verdict    │                            Reason                            │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+  │ AMD Crash Defender  │ 1 — Kill  │ Stop +        │ Pure telemetry, stop this first before the kernel drivers    │
+  │ Service             │           │ disable       │                                                              │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+  │ amdfendr (kernel)   │ 1 — Kill  │ Disable on    │ Documented BSOD causation (LKD_0xA1000005_amdfendr) — this   │
+  │                     │           │ next boot     │ one is actively working against us                           │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+  │ amdfendrmgr         │ 1 — Kill  │ Disable on    │ Same risk, must be paired with amdfendr                      │
+  │ (kernel)            │           │ next boot     │                                                              │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+  │ AMD External Events │ 1 — Kill  │ Stop +        │ FreeSync/hotkeys — zero value on AI workload                 │
+  │  Utility            │           │ disable       │                                                              │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+  │ AmdPpkg +           │ 3 —       │ Do not touch  │ Delivers AMD-tuned power profiles to the 6900HS — serves the │
+  │ AmdPpkgSvc          │ Monitor   │               │  workload                                                    │
+  └─────────────────────┴───────────┴───────────────┴──────────────────────────────────────────────────────────────┘
+
+  ASUS Stack
+
+  ┌──────────────────────────┬──────────┬─────────────────┬────────────────────────────────────────────────────────┐
+  │         Service          │   Tier   │     Verdict     │                         Reason                         │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ AsusSAIO (kernel)        │ 2 —      │ Stop + disable, │ Same driver family as AsUpIO.sys — documented BSOD     │
+  │                          │ Disable  │  no delete      │ history across ROG systems                             │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ASUSSystemAnalysis       │ 1 — Kill │ Stop + disable  │ Userspace front-end for AsusSAIO diagnostics           │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ASUSSystemDiagnosis      │ 1 — Kill │ Stop + disable  │ Same — diagnostic UI bloat                             │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ AsusAppService           │ 1 — Kill │ Stop + disable  │ MyASUS UI daemon, no hardware dependency               │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ASUSSoftwareManager      │ 1 — Kill │ Stop + disable  │ Silent OTA updater — actively dangerous, can reinstall │
+  │                          │          │                 │  what we remove                                        │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ASUSSwitch               │ 1 — Kill │ Stop + disable  │ PC migration tool, not GPU MUX — pure bloat            │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ROGKB (kernel, already   │ 2 —      │ Set disabled    │ ROG key → Armoury Crate, already dead, formalize it    │
+  │ stopped)                 │ Disable  │                 │                                                        │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ATKWMIACPIIO (kernel)    │ 3 —      │ Do not touch    │ Fn key ACPI event interception — low overhead,         │
+  │                          │ Monitor  │                 │ removing it kills brightness/fan hotkeys               │
+  ├──────────────────────────┼──────────┼─────────────────┼────────────────────────────────────────────────────────┤
+  │ ASUSOptimization         │ ?        │ Need your input │ Executes the Fn hotkey actions — if you use screen     │
+  │                          │          │                 │ brightness keys or fan mode toggle, this has to stay   │
+  └──────────────────────────┴──────────┴─────────────────┴────────────────────────────────────────────────────────┘
+
+  ---
+  Two questions before I write a line:
+
+  1. Fn hotkeys — do you use Fn+F5/F6 (brightness), Fn+F3/F4 (keyboard backlight), or the fan/performance mode toggle?
+  If yes, ASUSOptimization stays. If no, it's Tier 1.
+  2. External display — do you ever connect an external monitor? If yes, AMD External Events Utility should be set to
+  Manual rather than Disabled (it handles display hotplug detection).
+
+✻ Brewed for 49s
+
+> This is wise. Some services will be so deeply engrained into the operating system that we may have to add them to the
+ batch file as set to disable/force stop
+
+● Exactly right — and that maps directly to the tier structure. The distinction in the script should be:
+
+  - sc delete — only for services with no OS/driver package registration (the pure userspace bloat: AsusAppService,
+  ASUSSoftwareManager, ASUSSwitch, etc.)
+  - sc config start= disabled only, no delete — for kernel drivers registered via PnP/INF packages (amdfendr,
+  amdfendrmgr, AsusSAIO, ROGKB). Deleting those service entries can leave the device node in a broken state or get
+  restored on next driver scan anyway. Disable is the correct lever.
+
+  The script will attempt delete on Tier 1 targets and fall back gracefully if it fails, but won't even attempt delete
+  on Tier 2 kernel drivers.
+
+  Before I touch the script — still need those two answers:
+
+  1. Fn hotkeys — brightness (Fn+F5/F6), keyboard backlight (Fn+F3/F4), fan/performance mode toggle — do you use any of
+  these? Determines whether ASUSOptimization gets killed or stays.
+  2. External display — ever connect an external monitor to this machine? Determines whether AMD External Events Utility
+   gets killed or set to Manual.
+
+> 1.Fn hotkeys yes, but only screen capture, sleep or fullscreen. I've never Fn for brightness, keyboard backlight, or
+fan/performance ever before, and have no plans to do so. 2. I do not, but this could be useful in the future. How much
+compute performance is this background service taking up? Could it just be added to script as set to disable until I
+enable it?
+
+● Good point, and it maps neatly to the tier structure we already have — Tier 2 is exactly that pattern (stop + disable,
+   no delete attempt).
+
+  On your question about AMD External Events Utility: it's negligible at rest — typically under 5MB RAM and near-zero
+  CPU when no display events are happening. It only wakes up when a display connects/disconnects. Setting it to Manual
+  is the right call — it costs nothing at startup, and Windows can start it on demand when you need it.
+
+  Let me verify the exact service names in the dump before writing anything, so sc.exe commands don't miss:
+
+  Searched for 1 pattern (ctrl+o to expand)
+  ⎿  You've hit your limit · resets 12pm (America/Denver)
+
+✻ Sautéed for 1m 58s                                            
